@@ -89,7 +89,7 @@ def get_all_elements(did: str, wid: str) -> Tuple[List[str], List[str]]:
             "Content-Type": "application/json"
         }, 
         params={
-            'elementType': 'PARTSTUDIO' # TODO: double check if considering assemblies 
+            'elementType': 'PARTSTUDIO' 
         }
     )
     if response.ok: 
@@ -118,6 +118,7 @@ def get_ps_features(did: str, wid: str, eid: str) -> Any:
         return response.json() 
     else: 
         print(response.text)
+        print(response.headers)
         raise ValueError("API call failed")
     
 
@@ -145,19 +146,19 @@ def get_sketch_entities(api_response: Dict[str, Any], sketch_name: str) -> Tuple
                         'isConstruction': entity['isConstruction']
                     }
                 else: 
-                    sketch_entities[entity['entityId']] = entity['geometry'] # TODO: double check requirements for frontend rendering 
+                    sketch_entities[entity['entityId']] = entity['geometry'] 
                     sketch_entities[entity['entityId']]['isConstruction'] = entity['isConstruction']
             return feature['featureId'], sketch_entities
     # If no matching master sketches found 
     raise ValueError("Given master sketch name not found")
 
 
-def search_ref_entities(api_params: Dict[str, Any], sketch_id: str) -> List[str]: 
+def search_ref_entities(api_params: List[Any], sketch_id: str) -> List[str]: 
     """Search for any entities from the master sketch that are referenced 
     in this feature's parameters. 
 
     Args:
-        api_params (Dict[str, Any]): the parameters of a feature. 
+        api_params (List[Any]): a list of parameters of the feature. 
         sketch_id (str): featureId of the master sketch. 
 
     Returns:
@@ -176,8 +177,8 @@ def search_ref_entities(api_params: Dict[str, Any], sketch_id: str) -> List[str]
                         q_string = zlib.decompress(base64.b64decode(query['queryString'][28:-6])).decode("utf-8")
                     if sketch_id in q_string: 
                         for item in q_string.split("$"): 
-                            if len(item.split('R')[0]) == 12: 
-                                ref_entities.append(item.split('R')[0])
+                            ref_entities.append(item[:12]) # possible entityId
+    ref_entities = list(set(ref_entities)) # remove duplicates
     return ref_entities
     
 
@@ -202,8 +203,8 @@ def get_dependency(did: str, wid: str, eid: str, master_sketch_name: str):
     # Retrieve all sketch entities in the master sketch 
     source_ps = get_ps_features(did, wid, eid) 
     master_sketch_id, entities_geo = get_sketch_entities(source_ps, master_sketch_name) # Dict[entityId: Dict[geo_info]]
-    entities_dep = dict.fromkeys(entities_geo.keys(), []) # Dict[entityId: List[dependent_features]]
-                                                          # Every dependent feature is in the form: Tuple[did, wid, eid, fid]
+    entities_dep = {key: [] for key in entities_geo.keys()} # Dict[entityId: List[dependent_features]]
+                                                            # Every dependent feature is in the form: [did, wid, eid, fid]
     doc_info = {did: {
         'wid': wid, 
         'name': None, 
@@ -221,7 +222,7 @@ def get_dependency(did: str, wid: str, eid: str, master_sketch_name: str):
         if not q_searching: 
             if feature['featureId'] == master_sketch_id: 
                 q_searching = True # start checking query string from now on 
-        elif feature['btType'] == "BTMFeature-134" and feature['featureType'] != 'importDerived': # TODO: double check what to do with sketches 
+        elif feature['btType'] == "BTMFeature-134" and feature['featureType'] != 'importDerived': # ignore sketches
             ref_entities = search_ref_entities(feature['parameters'], master_sketch_id)
             if ref_entities: 
                 doc_info[did]['elements'][eid]['features'][feature['featureId']] = {'name': feature['name'], 'featureType': feature['featureType']}
@@ -232,7 +233,7 @@ def get_dependency(did: str, wid: str, eid: str, master_sketch_name: str):
     # From the same document but different elements 
     eid_list, ele_names = get_all_elements(did, wid)
     source_ind = eid_list.index(eid) 
-    doc_info[did]['elements'][eid] = ele_names[source_ind]
+    doc_info[did]['elements'][eid]['name'] = ele_names[source_ind]
     eid_list.pop(source_ind) # avoid double counting the source element 
     ele_names.pop(source_ind)
     for ele_ind in range(len(eid_list)): 
@@ -248,7 +249,7 @@ def get_dependency(did: str, wid: str, eid: str, master_sketch_name: str):
                                 if query['featureId'] == master_sketch_id: 
                                     q_searching = True # master sketch imported 
                             break 
-            elif feature['btType'] == "BTMFeature-134" and feature['featureType'] != 'importDerived': # TODO: double check what to do with sketches 
+            elif feature['btType'] == "BTMFeature-134" and feature['featureType'] != 'importDerived': # ignore sketches
                 ref_entities = search_ref_entities(feature['parameters'], master_sketch_id)
                 if ref_entities: 
                     doc_info[did]['elements'][eid_list[ele_ind]]['features'][feature['featureId']] = {'name': feature['name'], 'featureType': feature['featureType']}
@@ -284,7 +285,7 @@ def get_dependency(did: str, wid: str, eid: str, master_sketch_name: str):
                                     if query['featureId'] == master_sketch_id: 
                                         q_searching = True # master sketch imported 
                                 break 
-                elif feature['btType'] == "BTMFeature-134" and feature['featureType'] != 'importDerived': # TODO: double check what to do with sketches 
+                elif feature['btType'] == "BTMFeature-134" and feature['featureType'] != 'importDerived': # ignore sketches 
                     ref_entities = search_ref_entities(feature['parameters'], master_sketch_id)
                     if ref_entities: 
                         doc_info[did_list[doc_ind]]['elements'][eid_list[ele_ind]]['features'][feature['featureId']] = {'name': feature['name'], 'featureType': feature['featureType']}
