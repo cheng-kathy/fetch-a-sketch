@@ -1,0 +1,1793 @@
+[
+    [
+        {
+            "3xqOac7IkHFJ.bottom": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.0,
+                "pntY": 0.34290000000000004,
+                "dirX": -1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "3xqOac7IkHFJ.top": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.0,
+                "pntY": 0.3683,
+                "dirX": -1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "3xqOac7IkHFJ.left": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.2794,
+                "pntY": 0.0,
+                "dirX": 0.0,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "3xqOac7IkHFJ.right": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.2794,
+                "pntY": 0.10047785206541732,
+                "dirX": 0.0,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "3xqOac7IkHFJ.middle": {
+                "btType": "BTMSketchPoint-158",
+                "y": 0.3555999999999993,
+                "x": 0.0,
+                "isConstruction": true
+            },
+            "0ADaNLZYSKSH": {
+                "btType": "BTMSketchPoint-158",
+                "y": 0.3683,
+                "x": -0.36830000000000007,
+                "isConstruction": false
+            },
+            "kh6jDYaIdH8L.0.1.0": {
+                "btType": "BTMSketchPoint-158",
+                "y": -0.36830000000000007,
+                "x": -0.3683,
+                "isConstruction": false
+            },
+            "kh6jDYaIdH8L.1.1.0": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.34290000000000004,
+                "pntY": 2.0816681711721685e-17,
+                "dirX": -6.123233995736766e-17,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "kh6jDYaIdH8L.2.1.0": {
+                "btType": "BTMSketchPoint-158",
+                "y": 2.17742200888399e-17,
+                "x": -0.3555999999999993,
+                "isConstruction": true
+            },
+            "kh6jDYaIdH8L.3.1.0": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.3683,
+                "pntY": 2.42861286636753e-17,
+                "dirX": -6.123233995736766e-17,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "kh6jDYaIdH8L.4.1.0": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 1.7108315784088522e-17,
+                "pntY": 0.2794,
+                "dirX": -1.0,
+                "dirY": 6.123233995736766e-17,
+                "isConstruction": true
+            },
+            "kh6jDYaIdH8L.5.1.0": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.06184071473832951,
+                "pntY": -0.2794,
+                "dirX": -1.0,
+                "dirY": 6.123233995736766e-17,
+                "isConstruction": true
+            },
+            "kh6jDYaIdH8L.0.2.0": {
+                "btType": "BTMSketchPoint-158",
+                "y": -0.36830000000000007,
+                "x": 0.3683,
+                "isConstruction": false
+            },
+            "kh6jDYaIdH8L.1.2.0": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -4.163336342344337e-17,
+                "pntY": -0.34290000000000004,
+                "dirX": 1.0,
+                "dirY": -1.2246467991473532e-16,
+                "isConstruction": true
+            },
+            "kh6jDYaIdH8L.2.2.0": {
+                "btType": "BTMSketchPoint-158",
+                "y": -0.3555999999999993,
+                "x": -4.35484401776798e-17,
+                "isConstruction": true
+            },
+            "kh6jDYaIdH8L.3.2.0": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -4.163336342344337e-17,
+                "pntY": -0.3683,
+                "dirX": 1.0,
+                "dirY": -1.2246467991473532e-16,
+                "isConstruction": true
+            },
+            "kh6jDYaIdH8L.4.2.0": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.2794,
+                "pntY": 3.4216631568177044e-17,
+                "dirX": -1.2246467991473532e-16,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "kh6jDYaIdH8L.5.2.0": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.2794,
+                "pntY": -3.4216631568177044e-17,
+                "dirX": -1.2246467991473532e-16,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "kh6jDYaIdH8L.0.3.0": {
+                "btType": "BTMSketchPoint-158",
+                "y": 0.3683,
+                "x": 0.3683,
+                "isConstruction": false
+            },
+            "kh6jDYaIdH8L.1.3.0": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.34290000000000004,
+                "pntY": 2.0996569371381375e-17,
+                "dirX": -6.123233995736767e-17,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "kh6jDYaIdH8L.2.3.0": {
+                "btType": "BTMSketchPoint-158",
+                "y": 2.17742200888399e-17,
+                "x": 0.3555999999999993,
+                "isConstruction": true
+            },
+            "kh6jDYaIdH8L.3.3.0": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.3683,
+                "pntY": 2.0816681711721685e-17,
+                "dirX": 0.0,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "kh6jDYaIdH8L.4.3.0": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.12776754877101593,
+                "pntY": -0.2794,
+                "dirX": 1.0,
+                "dirY": 6.123233995736766e-17,
+                "isConstruction": true
+            },
+            "kh6jDYaIdH8L.5.3.0": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -1.7108315784088522e-17,
+                "pntY": 0.2794,
+                "dirX": 1.0,
+                "dirY": 6.123233995736766e-17,
+                "isConstruction": true
+            },
+            "kh6jDYaIdH8L.center": {
+                "btType": "BTMSketchPoint-158",
+                "y": 0.0,
+                "x": 0.0,
+                "isConstruction": true
+            },
+            "mxPs0LtK8pOm": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.13969999999999994,
+                "pntY": 2.77555756156289e-17,
+                "dirX": -2.449293598294707e-16,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "LL0Y0Cinqqfq": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.11429999999999993,
+                "pntY": 6.80077232468146e-17,
+                "dirX": 1.2246467991473532e-16,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "0VSbsmFhVuTx0.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.13969999999999994,
+                "pntY": -1.9406544976281625e-17,
+                "dirX": 2.449293598294707e-16,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "0VSbsmFhVuTx1.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.11429999999999993,
+                "pntY": 7.365928749380886e-18,
+                "dirX": -1.2246467991473532e-16,
+                "dirY": -1.0,
+                "isConstruction": true
+            }
+        },
+        {
+            "g9zjwEjcgpIz.bottom": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.01270000000000071,
+                "pntY": 0.025400000000000002,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "g9zjwEjcgpIz.top": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.01270000000000071,
+                "pntY": -0.025400000000000002,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "g9zjwEjcgpIz.left": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 1.4409046872332354e-15,
+                "pntY": 0.0,
+                "dirX": 0.0,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "g9zjwEjcgpIz.right": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.025399999999999978,
+                "pntY": 0.0,
+                "dirX": 0.0,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "g9zjwEjcgpIz.middle": {
+                "btType": "BTMSketchPoint-158",
+                "y": 0.0,
+                "x": 0.01270000000000071,
+                "isConstruction": true
+            },
+            "paKbCbtiH6WL.bottom": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.3683,
+                "pntY": 0.02540000000000004,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "paKbCbtiH6WL.top": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.36830000000000007,
+                "pntY": -0.02539999999999996,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "paKbCbtiH6WL.left": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.08889999999999998,
+                "pntY": 0.004291075563430817,
+                "dirX": 0.0,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "paKbCbtiH6WL.right": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.6477,
+                "pntY": 0.0042910755634307214,
+                "dirX": 0.0,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "paKbCbtiH6WL.middle": {
+                "btType": "BTMSketchPoint-158",
+                "y": 0.0,
+                "x": 0.3683,
+                "isConstruction": true
+            },
+            "BGcfp5wTXtJg.bottom": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.7238999999999993,
+                "pntY": 0.025399999999999978,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "BGcfp5wTXtJg.top": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.7238999999999993,
+                "pntY": -0.02540000000000002,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "BGcfp5wTXtJg.left": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.7112,
+                "pntY": 0.022939811742305728,
+                "dirX": 0.0,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "BGcfp5wTXtJg.right": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.7365999999999986,
+                "pntY": 0.022939811742305725,
+                "dirX": 0.0,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "BGcfp5wTXtJg.middle": {
+                "btType": "BTMSketchPoint-158",
+                "y": 0.0,
+                "x": 0.7238999999999993,
+                "isConstruction": true
+            },
+            "lfQ1XBtLTrEL": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.006349999999998557,
+                "pntY": 0.01674752849787471,
+                "dirX": 1.2246467991473532e-16,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "conGUgywo6de": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.020492976737022384,
+                "pntY": 0.057149999999999965,
+                "dirX": -1.0,
+                "dirY": -1.8369701987210297e-16,
+                "isConstruction": true
+            },
+            "i8phckWePO74": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.02539999999999855,
+                "pntY": 0.028574999999999975,
+                "dirX": 1.2246467991473537e-16,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "Wm4qm3CIQZoD": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.020492976737022384,
+                "pntY": -0.06985000000000002,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "BkDwRvVXsFWC": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.060261002016067475,
+                "pntY": 0.05714999999999996,
+                "dirX": -1.0,
+                "dirY": -1.8369701987210297e-16,
+                "isConstruction": true
+            },
+            "3RfzbNAoBOuc": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.08889999999999856,
+                "pntY": 0.05397499999999997,
+                "dirX": 1.2246467991473537e-16,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "qyDSgysg71u9": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.06026100201606749,
+                "pntY": -0.06985000000000002,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "Px9nzjPcEEZA.0.visualSharp": {
+                "btType": "BTMSketchPoint-158",
+                "y": 0.05714999999999995,
+                "x": -0.08889999999999858,
+                "isConstruction": false
+            },
+            "Px9nzjPcEEZA.0.filletArc": {
+                "btType": "BTCurveGeometryCircle-115",
+                "radius": 0.03175,
+                "clockwise": false,
+                "xCenter": -0.05714999999999858,
+                "yCenter": 0.025399999999999957,
+                "xDir": 1.0,
+                "yDir": 9.184850993605148e-16,
+                "isConstruction": true
+            },
+            "EHwyqdio12gf.0.visualSharp": {
+                "btType": "BTMSketchPoint-158",
+                "y": -0.06985000000000002,
+                "x": -0.08889999999999856,
+                "isConstruction": false
+            },
+            "EHwyqdio12gf.0.filletArc": {
+                "btType": "BTCurveGeometryCircle-115",
+                "radius": 0.03175,
+                "clockwise": false,
+                "xCenter": -0.05714999999999856,
+                "yCenter": -0.03810000000000002,
+                "xDir": 1.0,
+                "yDir": 0.0,
+                "isConstruction": true
+            },
+            "EgQUiUWOFGTs": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.006349999999998567,
+                "pntY": 0.19602888081073758,
+                "dirX": 0.0,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "vPznn9ICLLvO0.MirrorCS": {
+                "btType": "BTCurveGeometryCircle-115",
+                "radius": 0.03175,
+                "clockwise": true,
+                "xCenter": 0.7937499999999986,
+                "yCenter": 0.025399999999999957,
+                "xDir": -1.0,
+                "yDir": 5.51091059616309e-16,
+                "isConstruction": true
+            },
+            "vPznn9ICLLvO1.MirrorCS": {
+                "btType": "BTCurveGeometryCircle-115",
+                "radius": 0.03175,
+                "clockwise": true,
+                "xCenter": 0.7937499999999985,
+                "yCenter": -0.03810000000000002,
+                "xDir": -1.0,
+                "yDir": 0.0,
+                "isConstruction": true
+            },
+            "vPznn9ICLLvO2.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.7429499999999986,
+                "pntY": 0.19602888081073758,
+                "dirX": 0.0,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "vPznn9ICLLvO3.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.7968610020160676,
+                "pntY": -0.06985000000000002,
+                "dirX": -1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "vPznn9ICLLvO4.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.7429499999999986,
+                "pntY": 0.01674752849787471,
+                "dirX": -1.2246467991473532e-16,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "vPznn9ICLLvO5.MirrorP": {
+                "btType": "BTMSketchPoint-158",
+                "y": 0.05714999999999995,
+                "x": 0.8254999999999987,
+                "isConstruction": false
+            },
+            "vPznn9ICLLvO6.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.7570929767370225,
+                "pntY": 0.057149999999999965,
+                "dirX": 1.0,
+                "dirY": -1.8369701987210297e-16,
+                "isConstruction": true
+            },
+            "vPznn9ICLLvO7.MirrorP": {
+                "btType": "BTMSketchPoint-158",
+                "y": -0.06985000000000002,
+                "x": 0.8254999999999987,
+                "isConstruction": false
+            },
+            "vPznn9ICLLvO8.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.7619999999999986,
+                "pntY": 0.028574999999999975,
+                "dirX": -1.2246467991473537e-16,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "vPznn9ICLLvO9.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.7968610020160676,
+                "pntY": 0.05714999999999996,
+                "dirX": 1.0,
+                "dirY": -1.8369701987210297e-16,
+                "isConstruction": true
+            },
+            "vPznn9ICLLvO10.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.8254999999999986,
+                "pntY": 0.05397499999999997,
+                "dirX": -1.2246467991473537e-16,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "vPznn9ICLLvO11.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.7570929767370225,
+                "pntY": -0.06985000000000002,
+                "dirX": -1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "kab9vdDAsGN6": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.3683,
+                "pntY": 0.9715500000000001,
+                "dirX": 1.0,
+                "dirY": 6.123233995736766e-17,
+                "isConstruction": true
+            },
+            "BF3tj3ZVKVaW.0": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.46354999999999863,
+                "pntY": 0.19602888081073758,
+                "dirX": 0.0,
+                "dirY": 1.0,
+                "isConstruction": true
+            }
+        },
+        {
+            "45dB00ThtsT30.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.700405492601883,
+                "pntY": 0.8812972120580223,
+                "dirX": 0.5735764363510463,
+                "dirY": -0.8191520442889917,
+                "isConstruction": true
+            },
+            "45dB00ThtsT31.MirrorCS": {
+                "btType": "BTCurveGeometryCircle-115",
+                "radius": 0.08051799999999996,
+                "clockwise": true,
+                "xCenter": -0.7761110873850837,
+                "yCenter": 1.3504076624,
+                "xDir": -1.0,
+                "yDir": 0.0,
+                "isConstruction": true
+            },
+            "45dB00ThtsT32.MirrorCS": {
+                "btType": "BTCurveGeometryCircle-115",
+                "radius": 0.10160000000000001,
+                "clockwise": true,
+                "xCenter": -0.7761110873850837,
+                "yCenter": 1.3504076624,
+                "xDir": -1.0,
+                "yDir": 0.0,
+                "isConstruction": true
+            },
+            "45dB00ThtsT33.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.7291900478916769,
+                "pntY": 1.8096128400000002,
+                "dirX": -1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "45dB00ThtsT34.MirrorCS": {
+                "btType": "BTCurveGeometryCircle-115",
+                "radius": 0.12268200000000005,
+                "clockwise": false,
+                "xCenter": -0.7253110974387785,
+                "yCenter": 1.6340395947377084,
+                "xDir": 0.5735764363510479,
+                "yDir": -0.8191520442889906,
+                "isConstruction": true
+            },
+            "45dB00ThtsT35.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.9999337546328098,
+                "pntY": 0.0,
+                "dirX": -1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "45dB00ThtsT36.MirrorCS": {
+                "btType": "BTCurveGeometryCircle-115",
+                "radius": 0.10160000000000001,
+                "clockwise": false,
+                "xCenter": -0.7253110974387785,
+                "yCenter": 1.6340395947377084,
+                "xDir": -0.9755693570376028,
+                "yDir": 0.21969166941247062,
+                "isConstruction": true
+            },
+            "45dB00ThtsT37.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.6335635178712171,
+                "pntY": 1.188936757079715,
+                "dirX": 0.5735764363510459,
+                "dirY": -0.8191520442889918,
+                "isConstruction": true
+            },
+            "45dB00ThtsT38.MirrorCS": {
+                "btType": "BTCurveGeometryCircle-115",
+                "radius": 0.08051799999999996,
+                "clockwise": false,
+                "xCenter": -0.7253110974387785,
+                "yCenter": 1.6340395947377084,
+                "xDir": 0.5735764363510462,
+                "yDir": -0.8191520442889917,
+                "isConstruction": true
+            },
+            "45dB00ThtsT39.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.9835373199862836,
+                "pntY": 0.0,
+                "dirX": -1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "45dB00ThtsT310.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.7295373300399783,
+                "pntY": 1.8096128400000002,
+                "dirX": -1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "45dB00ThtsT311.MirrorCS": {
+                "btType": "BTCurveGeometryCircle-115",
+                "radius": 0.12268200000000005,
+                "clockwise": true,
+                "xCenter": -0.7761110873850837,
+                "yCenter": 1.3504076624,
+                "xDir": -1.0,
+                "yDir": 0.0,
+                "isConstruction": true
+            },
+            "45dB00ThtsT312.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.646648930262556,
+                "pntY": 1.5650887389482477,
+                "dirX": 0.8191520442889918,
+                "dirY": 0.5735764363510463,
+                "isConstruction": true
+            },
+            "45dB00ThtsT313.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.8015110873850837,
+                "pntY": 0.49798733275450985,
+                "dirX": 0.0,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "45dB00ThtsT314.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.8777110873850837,
+                "pntY": 0.3623568227981174,
+                "dirX": 0.0,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "45dB00ThtsT315.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.6026290974387783,
+                "pntY": 1.7377649444204357,
+                "dirX": 0.0,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "45dB00ThtsT316.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.6345567918314029,
+                "pntY": 1.5478193755505474,
+                "dirX": 0.8191520442889918,
+                "dirY": 0.5735764363510463,
+                "isConstruction": true
+            },
+            "45dB00ThtsT317.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.6850003763379673,
+                "pntY": 0.7062988616886751,
+                "dirX": -0.8191520442889919,
+                "dirY": -0.5735764363510462,
+                "isConstruction": true
+            },
+            "45dB00ThtsT318.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.6947715353189431,
+                "pntY": 0.4419705083384557,
+                "dirX": -0.9659258262890683,
+                "dirY": 0.25881904510252096,
+                "isConstruction": true
+            },
+            "45dB00ThtsT319.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.7781947973831495,
+                "pntY": 0.666779795434018,
+                "dirX": 0.8191520442889918,
+                "dirY": 0.5735764363510463,
+                "isConstruction": true
+            },
+            "45dB00ThtsT320.MirrorC": {
+                "btType": "BTCurveGeometryCircle-115",
+                "radius": 0.057150000000000006,
+                "clockwise": true,
+                "xCenter": -0.5143499999999993,
+                "yCenter": 0.057150000000000006,
+                "xDir": -0.9998740665674312,
+                "yDir": -0.015869814299742914,
+                "isConstruction": true
+            },
+            "45dB00ThtsT321.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.6447930974387784,
+                "pntY": 1.7377649444204357,
+                "dirX": 0.0,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "45dB00ThtsT322.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.6587410686937093,
+                "pntY": 1.5823581023459479,
+                "dirX": 0.8191520442889918,
+                "dirY": 0.5735764363510463,
+                "isConstruction": true
+            },
+            "45dB00ThtsT323.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.6237110974387784,
+                "pntY": 1.7377649444204357,
+                "dirX": 0.0,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "45dB00ThtsT324.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.8128265321881001,
+                "pntY": 1.0456301716623118,
+                "dirX": 0.8191520442889917,
+                "dirY": 0.5735764363510462,
+                "isConstruction": true
+            },
+            "45dB00ThtsT325.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.8987930873850838,
+                "pntY": 0.3623568227981174,
+                "dirX": 0.0,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "45dB00ThtsT326.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.6882844169507051,
+                "pntY": 0.7554720914563873,
+                "dirX": -0.8191520442889916,
+                "dirY": -0.5735764363510464,
+                "isConstruction": true
+            },
+            "45dB00ThtsT327.MirrorP": {
+                "btType": "BTMSketchPoint-158",
+                "y": 1.1770026607957338,
+                "x": -0.625207173691453,
+                "isConstruction": false
+            },
+            "45dB00ThtsT328.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.8566290873850837,
+                "pntY": 0.3623568227981174,
+                "dirX": 0.0,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "45dB00ThtsT329.MirrorP": {
+                "btType": "BTMSketchPoint-158",
+                "y": 0.0,
+                "x": -0.5143499999999993,
+                "isConstruction": false
+            },
+            "45dB00ThtsT330.MirrorP": {
+                "btType": "BTMSketchPoint-158",
+                "y": 0.7739028827957342,
+                "x": -0.6252071736914532,
+                "isConstruction": false
+            },
+            "45dB00ThtsT331.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.7640078555740807,
+                "pntY": 1.1055497469131395,
+                "dirX": -0.8191520442889919,
+                "dirY": -0.5735764363510458,
+                "isConstruction": true
+            },
+            "45dB00ThtsT332.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.5714999999999993,
+                "pntY": 0.18953208107685507,
+                "dirX": 0.0,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "45dB00ThtsT333.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.7519157171429283,
+                "pntY": 1.0625440136351694,
+                "dirX": -0.8191520442889918,
+                "dirY": -0.573576436351046,
+                "isConstruction": true
+            }
+        },
+        {
+            "OgsL20jg0Vkv": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.45719999999999866,
+                "pntY": 0.30840733647346497,
+                "dirX": 0.0,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "Yq7SLykbUe9R": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.5781284066628292,
+                "pntY": 1.0356509819290032,
+                "dirX": 0.8191520442889917,
+                "dirY": 0.5735764363510463,
+                "isConstruction": true
+            }
+        },
+        {
+            "7Nq1VDa0pctr.first": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.6237016056234106,
+                "pntY": 1.1969942610647324,
+                "dirX": 0.5735764363510459,
+                "dirY": -0.8191520442889919,
+                "isConstruction": true
+            },
+            "7Nq1VDa0pctr.second": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.615243673856736,
+                "pntY": 1.2537464462346715,
+                "dirX": 0.819152044288992,
+                "dirY": 0.5735764363510458,
+                "isConstruction": true
+            },
+            "7Nq1VDa0pctr.third": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.3769896595543657,
+                "pntY": 1.3705202267759715,
+                "dirX": -0.573576436351046,
+                "dirY": 0.8191520442889919,
+                "isConstruction": true
+            },
+            "7Nq1VDa0pctr.fourth": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.5496838871818119,
+                "pntY": 1.1601173675724394,
+                "dirX": -0.819152044288992,
+                "dirY": -0.5735764363510459,
+                "isConstruction": true
+            },
+            "U2KGphvNzojf": {
+                "btType": "BTMSketchPoint-158",
+                "y": 1.1374725422062764,
+                "x": -0.5820240493915206,
+                "isConstruction": false
+            },
+            "Vihs1dULPAPn": {
+                "btType": "BTMSketchPoint-158",
+                "y": 1.1842870815373923,
+                "x": -0.6148039427289829,
+                "isConstruction": false
+            },
+            "p5mWtbuUL2YI": {
+                "btType": "BTMSketchPoint-158",
+                "y": 0.8226492900005659,
+                "x": -0.18414999999999856,
+                "isConstruction": false
+            },
+            "jaibH5XxrCKP": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.3228573758223507,
+                "pntY": 0.9324033873791095,
+                "dirX": 0.7841996264809628,
+                "dirY": -0.6205086186565975,
+                "isConstruction": true
+            },
+            "ajdzKHbnIaO1": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.23594843049942582,
+                "pntY": 0.9902168464722009,
+                "dirX": 0.2953313667907532,
+                "dirY": -0.9553948836944365,
+                "isConstruction": true
+            },
+            "Ir5GZ7r4UruN": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.10767306804479257,
+                "pntY": 0.566874397031551,
+                "dirX": 0.28646960494838347,
+                "dirY": -0.9580893306162622,
+                "isConstruction": true
+            },
+            "tZdMgrYIPbEY": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.07083351519329961,
+                "pntY": 0.33655000000000007,
+                "dirX": -1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "joNiUuWgqiOY": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.26556859871495514,
+                "pntY": 0.5694031567493032,
+                "dirX": 0.3060706998481694,
+                "dirY": 0.9520087849880652,
+                "isConstruction": true
+            },
+            "6EM2veaE1MYO.0": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.07083351519330117,
+                "pntY": 0.22225000000000006,
+                "dirX": -1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "nlkdW8vCbziN": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.038805858151991904,
+                "pntY": 0.2600378560957279,
+                "dirX": 1.8369701987210297e-16,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "KKjbBDRAVuWE": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.340430858151992,
+                "pntY": 0.2841401212219693,
+                "dirX": 1.8369701987210297e-16,
+                "dirY": -1.0,
+                "isConstruction": true
+            }
+        },
+        {
+            "YSAFIDkLerGm.first": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.340430858151992,
+                "pntY": 0.18205872962002917,
+                "dirX": 0.0,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "YSAFIDkLerGm.second": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.1883837872279879,
+                "pntY": 0.2540000000000001,
+                "dirX": 1.0,
+                "dirY": 6.123233995736766e-17,
+                "isConstruction": true
+            },
+            "YSAFIDkLerGm.third": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.03880585815199189,
+                "pntY": 0.1819943638443947,
+                "dirX": 0.0,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "YSAFIDkLerGm.fourth": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.1883837872279879,
+                "pntY": 0.13970000000000007,
+                "dirX": -1.0,
+                "dirY": -1.8369701987210297e-16,
+                "isConstruction": true
+            },
+            "sngogiKa6Q51": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.18058668377438053,
+                "pntY": 0.3237922010134653,
+                "dirX": 0.7660444431189777,
+                "dirY": 0.6427876096865397,
+                "isConstruction": true
+            }
+        },
+        {
+            "Z41HzRgkxfzR.first": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.26189934462308884,
+                "pntY": 0.12065000000000009,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "Z41HzRgkxfzR.second": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.1650999999999999,
+                "pntY": 0.457408810377121,
+                "dirX": -1.2246467991473532e-16,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "Z41HzRgkxfzR.third": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.22053186949491485,
+                "pntY": 0.7810500000000001,
+                "dirX": -1.0,
+                "dirY": -3.0616169978683826e-16,
+                "isConstruction": true
+            },
+            "Z41HzRgkxfzR.fourth": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.21590000000000004,
+                "pntY": 0.457408810377121,
+                "dirX": 0.0,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "Z41HzRgkxfzR.firstCornerSnap0": {
+                "btType": "BTMSketchPoint-158",
+                "y": 0.09525000000000002,
+                "x": -0.34290000000000004,
+                "isConstruction": false
+            }
+        },
+        {
+            "CFElOtmqaQrT.0": {
+                "btType": "BTMSketchPoint-158",
+                "y": -0.6858000000000001,
+                "x": 0.13970000000000002,
+                "isConstruction": false
+            },
+            "CFElOtmqaQrT.1": {
+                "btType": "BTMSketchPoint-158",
+                "y": -0.6858000000000001,
+                "x": 0.11429999999999997,
+                "isConstruction": false
+            },
+            "CFElOtmqaQrT.2": {
+                "btType": "BTMSketchPoint-158",
+                "y": -0.6858000000000001,
+                "x": -0.11429999999999997,
+                "isConstruction": false
+            },
+            "CFElOtmqaQrT.3": {
+                "btType": "BTMSketchPoint-158",
+                "y": -0.6858000000000001,
+                "x": -0.13970000000000002,
+                "isConstruction": false
+            },
+            "Y36Y1RcMvGLm.first": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.12734505906701088,
+                "pntY": -0.6604000000000001,
+                "dirX": -1.0,
+                "dirY": -1.2246467991473532e-16,
+                "isConstruction": true
+            },
+            "Y36Y1RcMvGLm.second": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.11429999999999996,
+                "pntY": -0.543561898937228,
+                "dirX": -1.8369701987210297e-16,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "Y36Y1RcMvGLm.third": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.12615535483956317,
+                "pntY": -3.3174812682630815e-18,
+                "dirX": 1.0,
+                "dirY": 2.4492935982947064e-16,
+                "isConstruction": true
+            },
+            "Y36Y1RcMvGLm.fourth": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.13969999999999996,
+                "pntY": -0.5436443404657296,
+                "dirX": 3.0616169978683826e-16,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "jSTr6AJUwRkK.first": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.1269520975768566,
+                "pntY": -0.6604000000000001,
+                "dirX": -1.0,
+                "dirY": -1.2246467991473535e-16,
+                "isConstruction": true
+            },
+            "jSTr6AJUwRkK.second": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.13970000000000005,
+                "pntY": -0.5323977230177346,
+                "dirX": -1.8353034501373252e-16,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "jSTr6AJUwRkK.third": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.12695209757685674,
+                "pntY": 3.1238575094738597e-18,
+                "dirX": 1.0,
+                "dirY": 2.449293598294707e-16,
+                "isConstruction": true
+            },
+            "jSTr6AJUwRkK.fourth": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.11429999999999997,
+                "pntY": -0.5327290213389595,
+                "dirX": 3.05311331771918e-16,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "6y1si8OgmQKe.0": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.0,
+                "pntY": -0.49690987877803083,
+                "dirX": 0.0,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "sO3PKOHlklEt": {
+                "btType": "BTCurveGeometryCircle-115",
+                "radius": 0.057150000000000034,
+                "clockwise": false,
+                "xCenter": 0.0,
+                "yCenter": -0.50165,
+                "xDir": 1.0,
+                "yDir": 0.0,
+                "isConstruction": true
+            },
+            "cmzPVYVPu4oF": {
+                "btType": "BTCurveGeometryCircle-115",
+                "radius": 0.025400000000000002,
+                "clockwise": false,
+                "xCenter": -0.072748389157424,
+                "yCenter": -0.508,
+                "xDir": 1.0,
+                "yDir": 1.8369701987210297e-16,
+                "isConstruction": true
+            },
+            "AU8DCoZsQaGq0.MirrorC": {
+                "btType": "BTCurveGeometryCircle-115",
+                "radius": 0.025400000000000002,
+                "clockwise": true,
+                "xCenter": 0.07274838915742374,
+                "yCenter": -0.508,
+                "xDir": -1.0,
+                "yDir": 1.8369701987210297e-16,
+                "isConstruction": true
+            }
+        },
+        {
+            "zYOr1XpZdDDr.0": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.072748389157424,
+                "pntY": -0.09099127037997096,
+                "dirX": 0.0,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "VFJhYXk55Wll": {
+                "btType": "BTCurveGeometryCircle-115",
+                "radius": 0.057150000000000006,
+                "clockwise": false,
+                "xCenter": 0.072748389157424,
+                "yCenter": -0.07620000000000005,
+                "xDir": 1.0,
+                "yDir": 0.0,
+                "isConstruction": true
+            }
+        },
+        {
+            "gsvwNYxR4A3m.0": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.1905,
+                "pntY": 0.2730500000000001,
+                "dirX": 0.0,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "snfAth80Vmcw.0": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.07083351519329961,
+                "pntY": 0.33655000000000007,
+                "dirX": -1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "CHH1flBUPrlQ.0": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.038805858151991904,
+                "pntY": 0.2600378560957279,
+                "dirX": 1.8369701987210297e-16,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "CHH1flBUPrlQ.1": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": 0.07083351519330117,
+                "pntY": 0.22225000000000006,
+                "dirX": -1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "CHH1flBUPrlQ.2": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.340430858151992,
+                "pntY": 0.2841401212219693,
+                "dirX": 1.8369701987210297e-16,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "2mBItO2Ir6wg.first": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.23495000000000002,
+                "pntY": 0.2677117471456528,
+                "dirX": 1.2246467991473532e-16,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "2mBItO2Ir6wg.second": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.2461376002788544,
+                "pntY": 0.2476500000000001,
+                "dirX": -1.0,
+                "dirY": -1.8369701987210297e-16,
+                "isConstruction": true
+            },
+            "2mBItO2Ir6wg.third": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.26035,
+                "pntY": 0.2677117471456528,
+                "dirX": -2.4492935982947064e-16,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "2mBItO2Ir6wg.fourth": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.2845504581928253,
+                "pntY": 0.2984500000000001,
+                "dirX": 1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "VkZgaOORzVSV0.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.14604999999999999,
+                "pntY": 0.2677117471456528,
+                "dirX": -1.2246467991473532e-16,
+                "dirY": -1.0,
+                "isConstruction": true
+            },
+            "wZuKbVscc1Vs0.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.09644954180717469,
+                "pntY": 0.2984500000000001,
+                "dirX": -1.0,
+                "dirY": 0.0,
+                "isConstruction": true
+            },
+            "NvUaoRjsSn810.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.12064999999999998,
+                "pntY": 0.2677117471456528,
+                "dirX": 2.4492935982947064e-16,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "ZqbvmxgtbqRL0.MirrorCS": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.09644954180717469,
+                "pntY": 0.2476500000000001,
+                "dirX": 1.0,
+                "dirY": -1.8369701987210297e-16,
+                "isConstruction": true
+            }
+        },
+        {
+            "QXyYbQoIB4zi": {
+                "btType": "BTCurveGeometryCircle-115",
+                "radius": 0.09099862392677888,
+                "clockwise": false,
+                "xCenter": -0.1841499999999985,
+                "yCenter": 0.8226492900005657,
+                "xDir": 1.0,
+                "yDir": 0.0,
+                "isConstruction": true
+            },
+            "sWQnnNs3w6TN": {
+                "btType": "BTCurveGeometryCircle-115",
+                "radius": 0.09576112392677888,
+                "clockwise": false,
+                "xCenter": -0.1841499999999985,
+                "yCenter": 0.8226492900005657,
+                "xDir": 1.0,
+                "yDir": 0.0,
+                "isConstruction": true
+            },
+            "HmYOCvp6g8OG": {
+                "btType": "BTCurveGeometryCircle-115",
+                "radius": 0.022906359816843927,
+                "clockwise": false,
+                "xCenter": -0.025400000000000034,
+                "yCenter": 0.1695450000000001,
+                "xDir": 1.0,
+                "yDir": 0.0,
+                "isConstruction": true
+            },
+            "Ce208aRams51": {
+                "btType": "BTCurveGeometryCircle-115",
+                "radius": 0.027668859816843926,
+                "clockwise": false,
+                "xCenter": -0.025400000000000034,
+                "yCenter": 0.1695450000000001,
+                "xDir": 1.0,
+                "yDir": 0.0,
+                "isConstruction": true
+            },
+            "30YeD8Visoa7": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.04481905460979629,
+                "pntY": 0.513092975369941,
+                "dirX": 0.1365342402936633,
+                "dirY": -0.9906353523004477,
+                "isConstruction": true
+            },
+            "rXv7eB6VFf3X": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.15892765863016936,
+                "pntY": 0.46412236910719723,
+                "dirX": 0.3334204259053928,
+                "dirY": -0.9427782451823262,
+                "isConstruction": true
+            },
+            "Jn6q3TFbA4Ad": {
+                "btType": "BTCurveGeometryCircle-115",
+                "radius": 0.04445,
+                "clockwise": false,
+                "xCenter": -0.025400000000000034,
+                "yCenter": 0.1695450000000001,
+                "xDir": 1.0,
+                "yDir": 0.0,
+                "isConstruction": true
+            },
+            "Net0oP1OpUj2": {
+                "btType": "BTCurveGeometryCircle-115",
+                "radius": 0.045720000000000004,
+                "clockwise": false,
+                "xCenter": -0.025400000000000034,
+                "yCenter": 0.1695450000000001,
+                "xDir": 1.0,
+                "yDir": 0.0,
+                "isConstruction": true
+            }
+        },
+        {
+            "OqeMLvkvoWJX.bottom": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.1905,
+                "pntY": 0.3873500000000001,
+                "dirX": -1.0,
+                "dirY": -1.2246467991473532e-16,
+                "isConstruction": true
+            },
+            "OqeMLvkvoWJX.top": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.19050000000000006,
+                "pntY": 0.7175500000000001,
+                "dirX": -1.0,
+                "dirY": -1.2246467991473532e-16,
+                "isConstruction": true
+            },
+            "OqeMLvkvoWJX.left": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.17145000000000055,
+                "pntY": 0.6646171799583399,
+                "dirX": -1.8369701987210297e-16,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "OqeMLvkvoWJX.right": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.20955000000000054,
+                "pntY": 0.6773171799583397,
+                "dirX": -1.8369701987210297e-16,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "OqeMLvkvoWJX.middle": {
+                "btType": "BTMSketchPoint-158",
+                "y": 0.5524500000000001,
+                "x": -0.19050000000000003,
+                "isConstruction": true
+            },
+            "1urj2ML5VjI3.bottom": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.17909230645895,
+                "pntY": 0.44164929000056585,
+                "dirX": 1.0,
+                "dirY": 2.449293598294706e-16,
+                "isConstruction": true
+            },
+            "1urj2ML5VjI3.top": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.17909230645894997,
+                "pntY": 0.7718492900005659,
+                "dirX": 1.0,
+                "dirY": 2.4492935982947064e-16,
+                "isConstruction": true
+            },
+            "1urj2ML5VjI3.left": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.21590000000000018,
+                "pntY": 0.6401724219322205,
+                "dirX": 6.123233995736766e-17,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "1urj2ML5VjI3.right": {
+                "btType": "BTCurveGeometryLine-117",
+                "pntX": -0.16510000000000016,
+                "pntY": 0.6401724219322205,
+                "dirX": 6.123233995736767e-17,
+                "dirY": 1.0,
+                "isConstruction": true
+            },
+            "XOIOcorAZ5PL": {
+                "btType": "BTMSketchPoint-158",
+                "y": 0.44164929000056585,
+                "x": -0.1905,
+                "isConstruction": false
+            }
+        }
+    ],
+    {
+        "3xqOac7IkHFJ.bottom": [],
+        "3xqOac7IkHFJ.top": [],
+        "3xqOac7IkHFJ.left": [],
+        "3xqOac7IkHFJ.right": [],
+        "3xqOac7IkHFJ.middle": [],
+        "0ADaNLZYSKSH": [],
+        "kh6jDYaIdH8L.0.1.0": [],
+        "kh6jDYaIdH8L.1.1.0": [],
+        "kh6jDYaIdH8L.2.1.0": [],
+        "kh6jDYaIdH8L.3.1.0": [],
+        "kh6jDYaIdH8L.4.1.0": [],
+        "kh6jDYaIdH8L.5.1.0": [],
+        "kh6jDYaIdH8L.0.2.0": [],
+        "kh6jDYaIdH8L.1.2.0": [],
+        "kh6jDYaIdH8L.2.2.0": [],
+        "kh6jDYaIdH8L.3.2.0": [],
+        "kh6jDYaIdH8L.4.2.0": [],
+        "kh6jDYaIdH8L.5.2.0": [],
+        "kh6jDYaIdH8L.0.3.0": [],
+        "kh6jDYaIdH8L.1.3.0": [],
+        "kh6jDYaIdH8L.2.3.0": [],
+        "kh6jDYaIdH8L.3.3.0": [],
+        "kh6jDYaIdH8L.4.3.0": [],
+        "kh6jDYaIdH8L.5.3.0": [],
+        "kh6jDYaIdH8L.center": [],
+        "mxPs0LtK8pOm": [
+            [
+                "8f9fe9d204739f5e18c3a028",
+                "1e1b84a808c45046d9eb0f37",
+                "92636f3646bafd099148b1f8",
+                "FGC2PJMFNVmqT2S_1"
+            ]
+        ],
+        "LL0Y0Cinqqfq": [
+            [
+                "8f9fe9d204739f5e18c3a028",
+                "1e1b84a808c45046d9eb0f37",
+                "92636f3646bafd099148b1f8",
+                "FQ4hIny9OXHGSGG_2"
+            ]
+        ],
+        "0VSbsmFhVuTx0.MirrorCS": [],
+        "0VSbsmFhVuTx1.MirrorCS": [],
+        "g9zjwEjcgpIz.bottom": [],
+        "g9zjwEjcgpIz.top": [],
+        "g9zjwEjcgpIz.left": [],
+        "g9zjwEjcgpIz.right": [],
+        "g9zjwEjcgpIz.middle": [],
+        "paKbCbtiH6WL.bottom": [],
+        "paKbCbtiH6WL.top": [],
+        "paKbCbtiH6WL.left": [],
+        "paKbCbtiH6WL.right": [],
+        "paKbCbtiH6WL.middle": [],
+        "BGcfp5wTXtJg.bottom": [],
+        "BGcfp5wTXtJg.top": [],
+        "BGcfp5wTXtJg.left": [],
+        "BGcfp5wTXtJg.right": [],
+        "BGcfp5wTXtJg.middle": [],
+        "lfQ1XBtLTrEL": [],
+        "conGUgywo6de": [],
+        "i8phckWePO74": [],
+        "Wm4qm3CIQZoD": [],
+        "BkDwRvVXsFWC": [],
+        "3RfzbNAoBOuc": [],
+        "qyDSgysg71u9": [],
+        "Px9nzjPcEEZA.0.visualSharp": [],
+        "Px9nzjPcEEZA.0.filletArc": [],
+        "EHwyqdio12gf.0.visualSharp": [],
+        "EHwyqdio12gf.0.filletArc": [],
+        "EgQUiUWOFGTs": [],
+        "vPznn9ICLLvO0.MirrorCS": [],
+        "vPznn9ICLLvO1.MirrorCS": [],
+        "vPznn9ICLLvO2.MirrorCS": [],
+        "vPznn9ICLLvO3.MirrorCS": [],
+        "vPznn9ICLLvO4.MirrorCS": [],
+        "vPznn9ICLLvO5.MirrorP": [],
+        "vPznn9ICLLvO6.MirrorCS": [],
+        "vPznn9ICLLvO7.MirrorP": [],
+        "vPznn9ICLLvO8.MirrorCS": [],
+        "vPznn9ICLLvO9.MirrorCS": [],
+        "vPznn9ICLLvO10.MirrorCS": [],
+        "vPznn9ICLLvO11.MirrorCS": [],
+        "kab9vdDAsGN6": [],
+        "BF3tj3ZVKVaW.0": [],
+        "45dB00ThtsT30.MirrorCS": [],
+        "45dB00ThtsT31.MirrorCS": [],
+        "45dB00ThtsT32.MirrorCS": [],
+        "45dB00ThtsT33.MirrorCS": [],
+        "45dB00ThtsT34.MirrorCS": [],
+        "45dB00ThtsT35.MirrorCS": [],
+        "45dB00ThtsT36.MirrorCS": [],
+        "45dB00ThtsT37.MirrorCS": [],
+        "45dB00ThtsT38.MirrorCS": [],
+        "45dB00ThtsT39.MirrorCS": [],
+        "45dB00ThtsT310.MirrorCS": [],
+        "45dB00ThtsT311.MirrorCS": [],
+        "45dB00ThtsT312.MirrorCS": [],
+        "45dB00ThtsT313.MirrorCS": [],
+        "45dB00ThtsT314.MirrorCS": [],
+        "45dB00ThtsT315.MirrorCS": [],
+        "45dB00ThtsT316.MirrorCS": [],
+        "45dB00ThtsT317.MirrorCS": [],
+        "45dB00ThtsT318.MirrorCS": [],
+        "45dB00ThtsT319.MirrorCS": [],
+        "45dB00ThtsT320.MirrorC": [],
+        "45dB00ThtsT321.MirrorCS": [],
+        "45dB00ThtsT322.MirrorCS": [],
+        "45dB00ThtsT323.MirrorCS": [],
+        "45dB00ThtsT324.MirrorCS": [],
+        "45dB00ThtsT325.MirrorCS": [],
+        "45dB00ThtsT326.MirrorCS": [],
+        "45dB00ThtsT327.MirrorP": [],
+        "45dB00ThtsT328.MirrorCS": [],
+        "45dB00ThtsT329.MirrorP": [],
+        "45dB00ThtsT330.MirrorP": [],
+        "45dB00ThtsT331.MirrorCS": [],
+        "45dB00ThtsT332.MirrorCS": [],
+        "45dB00ThtsT333.MirrorCS": [],
+        "OgsL20jg0Vkv": [],
+        "Yq7SLykbUe9R": [],
+        "7Nq1VDa0pctr.first": [],
+        "7Nq1VDa0pctr.second": [],
+        "7Nq1VDa0pctr.third": [],
+        "7Nq1VDa0pctr.fourth": [],
+        "U2KGphvNzojf": [],
+        "Vihs1dULPAPn": [],
+        "p5mWtbuUL2YI": [],
+        "jaibH5XxrCKP": [],
+        "ajdzKHbnIaO1": [],
+        "Ir5GZ7r4UruN": [],
+        "tZdMgrYIPbEY": [],
+        "joNiUuWgqiOY": [],
+        "6EM2veaE1MYO.0": [],
+        "nlkdW8vCbziN": [],
+        "KKjbBDRAVuWE": [],
+        "YSAFIDkLerGm.first": [],
+        "YSAFIDkLerGm.second": [],
+        "YSAFIDkLerGm.third": [],
+        "YSAFIDkLerGm.fourth": [],
+        "sngogiKa6Q51": [],
+        "Z41HzRgkxfzR.first": [],
+        "Z41HzRgkxfzR.second": [],
+        "Z41HzRgkxfzR.third": [],
+        "Z41HzRgkxfzR.fourth": [],
+        "Z41HzRgkxfzR.firstCornerSnap0": [],
+        "CFElOtmqaQrT.0": [],
+        "CFElOtmqaQrT.1": [],
+        "CFElOtmqaQrT.2": [],
+        "CFElOtmqaQrT.3": [],
+        "Y36Y1RcMvGLm.first": [],
+        "Y36Y1RcMvGLm.second": [],
+        "Y36Y1RcMvGLm.third": [],
+        "Y36Y1RcMvGLm.fourth": [],
+        "jSTr6AJUwRkK.first": [],
+        "jSTr6AJUwRkK.second": [],
+        "jSTr6AJUwRkK.third": [],
+        "jSTr6AJUwRkK.fourth": [],
+        "6y1si8OgmQKe.0": [],
+        "sO3PKOHlklEt": [],
+        "cmzPVYVPu4oF": [
+            [
+                "dacbcaa78d86daf1709b6033",
+                "0200cb88ff48bf8b8d0fdcf4",
+                "a76c4eae17147a8683fe14c9",
+                "FJW8mcOhpjhswb3_6"
+            ]
+        ],
+        "AU8DCoZsQaGq0.MirrorC": [],
+        "zYOr1XpZdDDr.0": [],
+        "VFJhYXk55Wll": [],
+        "gsvwNYxR4A3m.0": [],
+        "snfAth80Vmcw.0": [],
+        "CHH1flBUPrlQ.0": [],
+        "CHH1flBUPrlQ.1": [],
+        "CHH1flBUPrlQ.2": [],
+        "2mBItO2Ir6wg.first": [],
+        "2mBItO2Ir6wg.second": [],
+        "2mBItO2Ir6wg.third": [],
+        "2mBItO2Ir6wg.fourth": [],
+        "VkZgaOORzVSV0.MirrorCS": [],
+        "wZuKbVscc1Vs0.MirrorCS": [],
+        "NvUaoRjsSn810.MirrorCS": [],
+        "ZqbvmxgtbqRL0.MirrorCS": [],
+        "QXyYbQoIB4zi": [],
+        "sWQnnNs3w6TN": [],
+        "HmYOCvp6g8OG": [],
+        "Ce208aRams51": [],
+        "30YeD8Visoa7": [],
+        "rXv7eB6VFf3X": [],
+        "Jn6q3TFbA4Ad": [],
+        "Net0oP1OpUj2": [],
+        "OqeMLvkvoWJX.bottom": [],
+        "OqeMLvkvoWJX.top": [],
+        "OqeMLvkvoWJX.left": [],
+        "OqeMLvkvoWJX.right": [],
+        "OqeMLvkvoWJX.middle": [],
+        "1urj2ML5VjI3.bottom": [],
+        "1urj2ML5VjI3.top": [],
+        "1urj2ML5VjI3.left": [],
+        "1urj2ML5VjI3.right": [],
+        "XOIOcorAZ5PL": []
+    },
+    {
+        "56e646580a50f305280bbafc": {
+            "wid": "5a99299fc7972f9cefe014a6",
+            "name": "Master Sketch - Copy",
+            "elements": {
+                "482f1ae4627799170e6a9a4e": {
+                    "name": "Master Sketch",
+                    "features": {
+                        "FeYY7te4TFnwGwq_0": {
+                            "name": "Drivebase Top",
+                            "featureType": "newSketch"
+                        },
+                        "FI9At4tcZaGGRls_0": {
+                            "name": "Drivebase Side",
+                            "featureType": "newSketch"
+                        },
+                        "F7sar4ELjSNj5aW_0": {
+                            "name": "Reef",
+                            "featureType": "newSketch"
+                        },
+                        "FXpMILQD8f7H2Tl_0": {
+                            "name": "Substation",
+                            "featureType": "newSketch"
+                        },
+                        "FNTTq7hkvK38DqM_0": {
+                            "name": "Arm",
+                            "featureType": "newSketch"
+                        },
+                        "FHGQjVvOGrSfyBC_0": {
+                            "name": "Hopper",
+                            "featureType": "newSketch"
+                        },
+                        "FGzwzRBOomBkPM9_0": {
+                            "name": "Frame Side",
+                            "featureType": "newSketch"
+                        },
+                        "FHqEgo9hc2sdLj4_0": {
+                            "name": "Claw Sketch",
+                            "featureType": "newSketch"
+                        },
+                        "F7FCFhbyFYnhzJV_0": {
+                            "name": "Front Home Coral",
+                            "featureType": "newSketch"
+                        },
+                        "FIRMGPA0e1rLc9p_0": {
+                            "name": "Coral Grabber",
+                            "featureType": "newSketch"
+                        },
+                        "FQEsnAt9UN7NyH7_0": {
+                            "name": "Chain Plan",
+                            "featureType": "newSketch"
+                        },
+                        "FCl6CrC001EROBg_0": {
+                            "name": "Tube Sketch",
+                            "featureType": "newSketch"
+                        }
+                    }
+                },
+                "3782288a3cb5c17adc9748d4": {
+                    "name": "Part Studio - Bellypan",
+                    "features": {}
+                }
+            }
+        },
+        "0cac689b5bd09744c13ab024": {
+            "wid": "8a2337af88e95d9340ad54b5",
+            "name": "Arm - Copy",
+            "elements": {
+                "3d3578019abd755deff2b075": {
+                    "name": "Part Studio 1",
+                    "features": {}
+                }
+            }
+        },
+        "bb5e5590c6503aca93e8de36": {
+            "wid": "22a58548c638586ddec80177",
+            "name": "Hopper - Copy",
+            "elements": {
+                "9e43b0df51f7849b4b357d37": {
+                    "name": "Part Studio",
+                    "features": {}
+                }
+            }
+        },
+        "e66fb56133a19da9c938047d": {
+            "wid": "59cbfcbec725c3a6856c3ce5",
+            "name": "Main Assembly - Copy",
+            "elements": {}
+        },
+        "cb857c582d865315c6c41e99": {
+            "wid": "be6924e04f113aa0bccf6f84",
+            "name": "Drivebase - Copy",
+            "elements": {
+                "bf3773b12a2c354d13134549": {
+                    "name": "Part Studio",
+                    "features": {}
+                }
+            }
+        },
+        "8f9fe9d204739f5e18c3a028": {
+            "wid": "1e1b84a808c45046d9eb0f37",
+            "name": "Arm Gearbox - Copy",
+            "elements": {
+                "92636f3646bafd099148b1f8": {
+                    "name": "Part Studio",
+                    "features": {
+                        "FGC2PJMFNVmqT2S_1": {
+                            "name": "Extrude 1",
+                            "featureType": "extrude"
+                        },
+                        "FQ4hIny9OXHGSGG_2": {
+                            "name": "Extrude 2",
+                            "featureType": "extrude"
+                        }
+                    }
+                }
+            }
+        },
+        "dacbcaa78d86daf1709b6033": {
+            "wid": "0200cb88ff48bf8b8d0fdcf4",
+            "name": "Claw - Copy",
+            "elements": {
+                "a76c4eae17147a8683fe14c9": {
+                    "name": "Part Studio 1",
+                    "features": {
+                        "FG6u3rWBykHZI1M_4": {
+                            "name": "Robot belt 1",
+                            "featureType": "frcBeltCalculator"
+                        },
+                        "FJW8mcOhpjhswb3_6": {
+                            "name": "Robot belt 3",
+                            "featureType": "frcBeltCalculator"
+                        }
+                    }
+                }
+            }
+        }
+    }
+]

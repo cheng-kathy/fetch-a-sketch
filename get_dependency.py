@@ -63,9 +63,12 @@ def get_docs_in_folder(folder_id: str) -> Tuple[List[str], List[str], List[str]]
         raise ValueError("API call failed")
     
     response = response.json() 
-    did_list = [item['id'] for item in response['items']] 
-    wid_list = [item['defaultWorkspace']['id'] for item in response['items']] 
-    doc_name = [item['name'] for item in response['items']] 
+    did_list, wid_list, doc_name = [], [], [] 
+    for item in response['items']: 
+        if item['resourceType'] == 'document': # does not consider other file types or sub-folders 
+            did_list.append(item['id'])
+            wid_list.append(item['defaultWorkspace']['id'])
+            doc_name.append(item['name'])
     return did_list, wid_list, doc_name 
 
 
@@ -150,16 +153,16 @@ def get_sketch_entities(api_response: Dict[str, Any], sketch_name: str) -> Tuple
                     sketch_entities[entity['entityId']]['isConstruction'] = entity['isConstruction']
             return feature['featureId'], sketch_entities
     # If no matching master sketches found 
-    raise ValueError("Given master sketch name not found")
+    raise ValueError("Given master sketch name \"{}\" not found".format(sketch_name))
 
 
-def search_ref_entities(api_params: List[Any], sketch_id: str) -> List[str]: 
+def search_ref_entities(api_params: List[Any], sketch_ids: List[str]) -> List[str]: 
     """Search for any entities from the master sketch that are referenced 
     in this feature's parameters. 
 
     Args:
         api_params (List[Any]): a list of parameters of the feature. 
-        sketch_id (str): featureId of the master sketch. 
+        sketch_ids (List[str]): a list of featureIds of master sketches. 
 
     Returns:
         List[str]: a list of (possible) entityIds that are referenced in this feature. 
@@ -175,14 +178,16 @@ def search_ref_entities(api_params: List[Any], sketch_id: str) -> List[str]:
                         q_string = query['queryString'][23:-6]
                     else: # compressed query string 
                         q_string = zlib.decompress(base64.b64decode(query['queryString'][28:-6])).decode("utf-8")
-                    if sketch_id in q_string: 
-                        for item in q_string.split("$"): 
-                            ref_entities.append(item[:12]) # possible entityId
+                    for sketch_id in sketch_ids:
+                        if sketch_id in q_string: 
+                            for item in q_string.split("$"): 
+                                ref_entities.append(item[:12]) # possible entityId
+                            break 
     ref_entities = list(set(ref_entities)) # remove duplicates
     return ref_entities
     
 
-def get_dependency(did: str, wid: str, eid: str, master_sketch_name: str): 
+def get_dependency(did: str, wid: str, eid: str, master_sketches: List[str]): 
     """Get all direct downstream dependencies to every sketch entity in the 
     master sketch in an Onshape element. 
 
@@ -192,19 +197,27 @@ def get_dependency(did: str, wid: str, eid: str, master_sketch_name: str):
             This must be a workspace, not a version or microversion. 
         eid (str): element ID where the master sketch is created in. 
             This must be a Part Studio, not an Assembly, etc. 
-        master_sketch_name (str): name of the master sketch. If multiple sketches are renamed with 
+        master_sketches (List[str]): a list of names of all master sketchs. If multiple sketches are renamed with 
             the same name, only the first appearing is analyzed and returned. 
 
     Returns:
-        entities_geo (Dict[entityId: Dict[geo_info]]): geometric information for rendering individual entities; 
+        entities_geo (List[Dict[entityId: Dict[geo_info]]]): a list of geometric information for rendering individual entities; 
         entities_dep (Dict[entityId: List[dep_features]]): a list of downstream dependent features for every sketch entity; 
         doc_info (Dict[did: info]): user-defined document information for presentation (see detailed specifications below). 
     """
+    entities_geo = [] # List[Dict[entityId: Dict[geo_info]]]
+    entities_dep = {} # Dict[entityId: List[dependent_features]]
+                      # Every dependent feature is in the form: [did, wid, eid, fid]
+    
     # Retrieve all sketch entities in the master sketch 
     source_ps = get_ps_features(did, wid, eid) 
-    master_sketch_id, entities_geo = get_sketch_entities(source_ps, master_sketch_name) # Dict[entityId: Dict[geo_info]]
-    entities_dep = {key: [] for key in entities_geo.keys()} # Dict[entityId: List[dependent_features]]
-                                                            # Every dependent feature is in the form: [did, wid, eid, fid]
+    master_sketch_ids = [] 
+    for master_sketch in master_sketches:
+        master_sketch_id, geo_dict = get_sketch_entities(source_ps, master_sketch) 
+        master_sketch_ids.append(master_sketch_id)
+        entities_geo.append(geo_dict)
+        entities_dep.update({key: [] for key in geo_dict.keys()})
+        
     doc_info = {did: {
         'wid': wid, 
         'name': None, 
@@ -219,11 +232,11 @@ def get_dependency(did: str, wid: str, eid: str, master_sketch_name: str):
     
     # From the same element 
     for feature in source_ps['features']: 
-        if not q_searching: 
-            if feature['featureId'] == master_sketch_id: 
-                q_searching = True # start checking query string from now on 
-        elif feature['btType'] == "BTMFeature-134" and feature['featureType'] != 'importDerived': # ignore sketches
-            ref_entities = search_ref_entities(feature['parameters'], master_sketch_id)
+        if feature['featureId'] in master_sketch_ids: 
+            q_searching = True # start checking query string from now on 
+            doc_info[did]['elements'][eid]['features'][feature['featureId']] = {'name': feature['name'], 'featureType': feature['featureType']}
+        elif q_searching and feature['btType'] == "BTMFeature-134" and feature['featureType'] != 'importDerived': # ignore sketches
+            ref_entities = search_ref_entities(feature['parameters'], master_sketch_ids)
             if ref_entities: 
                 doc_info[did]['elements'][eid]['features'][feature['featureId']] = {'name': feature['name'], 'featureType': feature['featureType']}
             for entity in ref_entities: 
@@ -246,11 +259,13 @@ def get_dependency(did: str, wid: str, eid: str, master_sketch_name: str):
                     for param in feature['parameters']: 
                         if param['btType'] == "BTMParameterReferencePartStudio-3302": 
                             for query in param['partQuery']['queries']: 
-                                if query['featureId'] == master_sketch_id: 
+                                if query['btType'] == "BTMIndividualCreatedByQuery-137" and query['featureId'] in master_sketch_ids: 
                                     q_searching = True # master sketch imported 
+                                elif query['btType'] == "BTMIndividualQuery-138":
+                                    q_searching = True # entire part studio imported 
                             break 
             elif feature['btType'] == "BTMFeature-134" and feature['featureType'] != 'importDerived': # ignore sketches
-                ref_entities = search_ref_entities(feature['parameters'], master_sketch_id)
+                ref_entities = search_ref_entities(feature['parameters'], master_sketch_ids)
                 if ref_entities: 
                     doc_info[did]['elements'][eid_list[ele_ind]]['features'][feature['featureId']] = {'name': feature['name'], 'featureType': feature['featureType']}
                 for entity in ref_entities: 
@@ -282,11 +297,13 @@ def get_dependency(did: str, wid: str, eid: str, master_sketch_name: str):
                         for param in feature['parameters']: 
                             if param['btType'] == "BTMParameterReferencePartStudio-3302": 
                                 for query in param['partQuery']['queries']: 
-                                    if query['featureId'] == master_sketch_id: 
+                                    if query['btType'] == "BTMIndividualCreatedByQuery-137" and query['featureId'] in master_sketch_ids: 
                                         q_searching = True # master sketch imported 
+                                    elif query['btType'] == "BTMIndividualQuery-138":
+                                        q_searching = True # entire part studio imported 
                                 break 
                 elif feature['btType'] == "BTMFeature-134" and feature['featureType'] != 'importDerived': # ignore sketches 
-                    ref_entities = search_ref_entities(feature['parameters'], master_sketch_id)
+                    ref_entities = search_ref_entities(feature['parameters'], master_sketch_ids)
                     if ref_entities: 
                         doc_info[did_list[doc_ind]]['elements'][eid_list[ele_ind]]['features'][feature['featureId']] = {'name': feature['name'], 'featureType': feature['featureType']}
                     for entity in ref_entities: 
@@ -299,7 +316,15 @@ def get_dependency(did: str, wid: str, eid: str, master_sketch_name: str):
 if __name__ == "__main__": 
     # Master doc: https://cad.onshape.com/documents/85b058cdb321e64ab5d1f364/w/a54015e3085683ae412da7b1/e/78ac040ab4d3dfed2febd8a3
     # Folder ID: 6c38524bec94c0e6eb7f532f
-    entities_geo, entities_dep, doc_info = get_dependency('85b058cdb321e64ab5d1f364', 'a54015e3085683ae412da7b1', '78ac040ab4d3dfed2febd8a3', 'Master Sketch')
+    entities_geo, entities_dep, doc_info = get_dependency('85b058cdb321e64ab5d1f364', 'a54015e3085683ae412da7b1', '78ac040ab4d3dfed2febd8a3', ['Master Sketch'])
     results = [entities_geo, entities_dep, doc_info]
-    json.dump(results, open('test_output.json', 'w'))
+    json.dump(results, open('test_output_spray.json', 'w'))
     
+    # Master doc: https://cad.onshape.com/documents/56e646580a50f305280bbafc/w/5a99299fc7972f9cefe014a6/e/482f1ae4627799170e6a9a4e
+    # Folder ID: 514f41dd2f31f68c801bfeaa
+    # entities_geo, entities_dep, doc_info = get_dependency(
+    #     '56e646580a50f305280bbafc', '5a99299fc7972f9cefe014a6', '482f1ae4627799170e6a9a4e', 
+    #     ['Drivebase Top', 'Drivebase Side', 'Reef', 'Substation', 'Arm', 'Hopper', 'Frame Side', 'Claw Sketch', 'Front Home Coral', 'Coral Grabber', 'Chain Plan', 'Tube Sketch']
+    # )
+    # results = [entities_geo, entities_dep, doc_info]
+    # json.dump(results, open('test_output_robot.json', 'w'))
