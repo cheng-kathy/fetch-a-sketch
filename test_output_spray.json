@@ -68,13 +68,7 @@
             "I0vXvUA2jQt6": {
                 "btType": "BTCurveGeometryInterpolatedSpline-116",
                 "isPeriodic": false,
-                "startDerivativeY": -0.06302560778021471,
-                "endDerivativeX": 0.05388690255443043,
-                "endDerivativeY": -0.019034816339784294,
-                "startHandleX": 0.013970000000000002,
-                "startHandleY": 0.10599146407326177,
-                "endHandleX": 0.03728212325564015,
-                "endHandleY": 0.0571449387799281,
+                "derivatives": {},
                 "interpolationPoints": [
                     0.013970000000000002,
                     0.127,
@@ -82,7 +76,13 @@
                     0.050800000000000005
                 ],
                 "startDerivativeX": 0.0,
-                "derivatives": {},
+                "startDerivativeY": -0.06302560778021471,
+                "endDerivativeY": -0.019034816339784294,
+                "startHandleX": 0.013970000000000002,
+                "startHandleY": 0.10599146407326177,
+                "endHandleX": 0.03728212325564015,
+                "endHandleY": 0.0571449387799281,
+                "endDerivativeX": 0.05388690255443043,
                 "isConstruction": false
             },
             "XCMqmNGqBtlB": {
@@ -158,13 +158,7 @@
             "akSv596pjLuC": {
                 "btType": "BTCurveGeometryInterpolatedSpline-116",
                 "isPeriodic": false,
-                "startDerivativeY": 0.0,
-                "endDerivativeX": 0.0,
-                "endDerivativeY": -0.03810000000000002,
-                "startHandleX": 0.012700000000000001,
-                "startHandleY": 0.18288,
-                "endHandleX": 0.012700000000000001,
-                "endHandleY": 0.17145000000000005,
+                "derivatives": {},
                 "interpolationPoints": [
                     0.0,
                     0.18288000000000001,
@@ -172,7 +166,13 @@
                     0.15875
                 ],
                 "startDerivativeX": 0.0381,
-                "derivatives": {},
+                "startDerivativeY": 0.0,
+                "endDerivativeY": -0.03810000000000002,
+                "startHandleX": 0.012700000000000001,
+                "startHandleY": 0.18288,
+                "endHandleX": 0.012700000000000001,
+                "endHandleY": 0.17145000000000005,
+                "endDerivativeX": 0.0,
                 "isConstruction": false
             },
             "C1KyeXLCwAnX": {
@@ -244,13 +244,7 @@
             "fPFm22NJtmmg": {
                 "btType": "BTCurveGeometryInterpolatedSpline-116",
                 "isPeriodic": false,
-                "startDerivativeY": -0.0063556106229128995,
-                "endDerivativeX": 0.019049999999999984,
-                "endDerivativeY": -0.032995567884187116,
-                "startHandleX": -0.004161515943423617,
-                "startHandleY": 0.19174313546516764,
-                "endHandleX": 0.027766431420944294,
-                "endHandleY": 0.18117852262806242,
+                "derivatives": {},
                 "interpolationPoints": [
                     -0.016683568579055716,
                     0.19386167233947194,
@@ -258,7 +252,13 @@
                     0.17018000000000003
                 ],
                 "startDerivativeX": 0.0375661579068963,
-                "derivatives": {},
+                "startDerivativeY": -0.0063556106229128995,
+                "endDerivativeY": -0.032995567884187116,
+                "startHandleX": -0.004161515943423617,
+                "startHandleY": 0.19174313546516764,
+                "endHandleX": 0.027766431420944294,
+                "endHandleY": 0.18117852262806242,
+                "endDerivativeX": 0.019049999999999984,
                 "isConstruction": false
             },
             "HwoHX1JhoY5F": {
@@ -304,13 +304,7 @@
             "3NzYdThLYevv": {
                 "btType": "BTCurveGeometryInterpolatedSpline-116",
                 "isPeriodic": false,
-                "startDerivativeY": -0.025676500328763785,
-                "endDerivativeX": -0.04676582110501898,
-                "endDerivativeY": -0.025653724415245382,
-                "startHandleX": -0.0405363743674515,
-                "startHandleY": 0.15729076196738365,
-                "endHandleX": -0.04794392247548527,
-                "endHandleY": 0.14900083688205334,
+                "derivatives": {},
                 "interpolationPoints": [
                     -0.038132529510491606,
                     0.1658495954103049,
@@ -318,19 +312,19 @@
                     0.14044959541030488
                 ],
                 "startDerivativeX": -0.007211534570879682,
-                "derivatives": {},
+                "startDerivativeY": -0.025676500328763785,
+                "endDerivativeY": -0.025653724415245382,
+                "startHandleX": -0.0405363743674515,
+                "startHandleY": 0.15729076196738365,
+                "endHandleX": -0.04794392247548527,
+                "endHandleY": 0.14900083688205334,
+                "endDerivativeX": -0.04676582110501898,
                 "isConstruction": false
             },
             "fdUYk3fIjSrY": {
                 "btType": "BTCurveGeometryInterpolatedSpline-116",
                 "isPeriodic": false,
-                "startDerivativeY": 0.04507335297255055,
-                "endDerivativeX": 0.011332411468525205,
-                "endDerivativeY": 0.040348786230914535,
-                "startHandleX": -0.05402493925724966,
-                "startHandleY": 0.15547404640115506,
-                "endHandleX": -0.04572,
-                "endHandleY": 0.16002000000000005,
+                "derivatives": {},
                 "interpolationPoints": [
                     -0.0635325295104916,
                     0.14044959541030488,
@@ -338,7 +332,13 @@
                     0.1734695954103049
                 ],
                 "startDerivativeX": 0.028522770759725813,
-                "derivatives": {},
+                "startDerivativeY": 0.04507335297255055,
+                "endDerivativeY": 0.040348786230914535,
+                "startHandleX": -0.05402493925724966,
+                "startHandleY": 0.15547404640115506,
+                "endHandleX": -0.04572,
+                "endHandleY": 0.16002000000000005,
+                "endDerivativeX": 0.011332411468525205,
                 "isConstruction": false
             },
             "q4LRU2IqQh4K": {
@@ -1000,6 +1000,24 @@
             [
                 "85b058cdb321e64ab5d1f364",
                 "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "FjEouOIYIIR0J18_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "Ff10IF6odEs6xHU_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "FTYE2cuxWsQS9FD_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
                 "0c6a3639e3543017ff2a985a",
                 "FXQQrXWMuxGoelF_1"
             ],
@@ -1156,6 +1174,18 @@
             [
                 "85b058cdb321e64ab5d1f364",
                 "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "FdReHKOI3hjsqiJ_3"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "Ff10IF6odEs6xHU_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
                 "0c6a3639e3543017ff2a985a",
                 "FXQQrXWMuxGoelF_1"
             ],
@@ -1172,8 +1202,45 @@
                 "F6mhHDmGILNR0b9_1"
             ]
         ],
-        "iZORmyYsLWLB": [],
+        "iZORmyYsLWLB": [
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "Ff10IF6odEs6xHU_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "FvVUc5YKILZw4BW_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "FTYE2cuxWsQS9FD_5"
+            ]
+        ],
         "K89xDdgfiUxH": [
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "Ff10IF6odEs6xHU_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "FvVUc5YKILZw4BW_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "FTYE2cuxWsQS9FD_5"
+            ],
             [
                 "85b058cdb321e64ab5d1f364",
                 "a54015e3085683ae412da7b1",
@@ -1181,13 +1248,81 @@
                 "F90FrND1xX3TaA5_1"
             ]
         ],
-        "3NzYdThLYevv": [],
-        "fdUYk3fIjSrY": [],
+        "3NzYdThLYevv": [
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "FVLTM5rgl1gMDn9_4"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "Fse7nzByQxMJyaD_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F0v7LGrZvWEOu8F_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F6OZ41Af1jCYUb2_5"
+            ]
+        ],
+        "fdUYk3fIjSrY": [
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "FhwFbsjiFAgKwms_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "Fse7nzByQxMJyaD_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F0v7LGrZvWEOu8F_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F6OZ41Af1jCYUb2_5"
+            ]
+        ],
         "q4LRU2IqQh4K": [],
         "zLmJ7fU8kWL6": [],
         "uoUDeWLI4NjD": [],
         "RdQeOgyPtAAS": [],
         "CsTtqL6isWcd": [
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "Fse7nzByQxMJyaD_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F0v7LGrZvWEOu8F_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F6OZ41Af1jCYUb2_5"
+            ],
             [
                 "85b058cdb321e64ab5d1f364",
                 "a54015e3085683ae412da7b1",
@@ -1296,6 +1431,36 @@
             [
                 "85b058cdb321e64ab5d1f364",
                 "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "FVLTM5rgl1gMDn9_4"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "FhwFbsjiFAgKwms_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "Fse7nzByQxMJyaD_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F0v7LGrZvWEOu8F_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F6OZ41Af1jCYUb2_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
                 "0c6a3639e3543017ff2a985a",
                 "Fb4ynPjHi3GuZtL_1"
             ],
@@ -1310,6 +1475,30 @@
             [
                 "85b058cdb321e64ab5d1f364",
                 "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "FhwFbsjiFAgKwms_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "Fse7nzByQxMJyaD_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F0v7LGrZvWEOu8F_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F6OZ41Af1jCYUb2_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
                 "0c6a3639e3543017ff2a985a",
                 "Fb4ynPjHi3GuZtL_1"
             ],
@@ -1332,12 +1521,80 @@
                 "FuFfH7ZBVboeBRt_0"
             ]
         ],
-        "SV4PorWeU1qF": [],
-        "baIrHxEwZRy4": [],
+        "SV4PorWeU1qF": [
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "FhwFbsjiFAgKwms_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "Fse7nzByQxMJyaD_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F0v7LGrZvWEOu8F_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F6OZ41Af1jCYUb2_5"
+            ]
+        ],
+        "baIrHxEwZRy4": [
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "Fse7nzByQxMJyaD_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F0v7LGrZvWEOu8F_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F6OZ41Af1jCYUb2_5"
+            ]
+        ],
         "5I7UMQCHd6h7": [
             [
                 "85b058cdb321e64ab5d1f364",
                 "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F0HggKiPlCsqats_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "Fse7nzByQxMJyaD_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F0v7LGrZvWEOu8F_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F6OZ41Af1jCYUb2_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
                 "0c6a3639e3543017ff2a985a",
                 "Fb4ynPjHi3GuZtL_1"
             ],
@@ -1360,9 +1617,84 @@
                 "FuFfH7ZBVboeBRt_0"
             ]
         ],
-        "jJ0zmhcgTB6T": [],
-        "tvgLLpr5cQZC": [],
-        "vQ3Y9apuHNeN": [],
+        "jJ0zmhcgTB6T": [
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F0HggKiPlCsqats_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "Fse7nzByQxMJyaD_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F0v7LGrZvWEOu8F_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F6OZ41Af1jCYUb2_5"
+            ]
+        ],
+        "tvgLLpr5cQZC": [
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F0HggKiPlCsqats_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "Fse7nzByQxMJyaD_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F0v7LGrZvWEOu8F_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F6OZ41Af1jCYUb2_5"
+            ]
+        ],
+        "vQ3Y9apuHNeN": [
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "FhwFbsjiFAgKwms_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "Fse7nzByQxMJyaD_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F0v7LGrZvWEOu8F_5"
+            ],
+            [
+                "85b058cdb321e64ab5d1f364",
+                "a54015e3085683ae412da7b1",
+                "d71c6a3044a2bd80c5e7dc0f",
+                "F6OZ41Af1jCYUb2_5"
+            ]
+        ],
         "JSJxRjUKU0G7.0.visualSharp": [],
         "JSJxRjUKU0G7.0.filletArc": [],
         "ArGqmR7I8CWg.0.visualSharp": [],
@@ -1400,7 +1732,52 @@
                 },
                 "d71c6a3044a2bd80c5e7dc0f": {
                     "name": "Nozzle & Trigger",
-                    "features": {}
+                    "features": {
+                        "FdReHKOI3hjsqiJ_3": {
+                            "name": "Revolve 4",
+                            "featureType": "revolve"
+                        },
+                        "FjEouOIYIIR0J18_5": {
+                            "name": "Shell 3",
+                            "featureType": "shell"
+                        },
+                        "Ff10IF6odEs6xHU_5": {
+                            "name": "Extrude 3",
+                            "featureType": "extrude"
+                        },
+                        "FvVUc5YKILZw4BW_5": {
+                            "name": "Circular pattern 1",
+                            "featureType": "circularPattern"
+                        },
+                        "FTYE2cuxWsQS9FD_5": {
+                            "name": "Fillet 3",
+                            "featureType": "fillet"
+                        },
+                        "FVLTM5rgl1gMDn9_4": {
+                            "name": "Extrude 1",
+                            "featureType": "extrude"
+                        },
+                        "FhwFbsjiFAgKwms_5": {
+                            "name": "Fillet 1",
+                            "featureType": "fillet"
+                        },
+                        "F0HggKiPlCsqats_5": {
+                            "name": "Shell 1",
+                            "featureType": "shell"
+                        },
+                        "Fse7nzByQxMJyaD_5": {
+                            "name": "Hole 1",
+                            "featureType": "hole"
+                        },
+                        "F0v7LGrZvWEOu8F_5": {
+                            "name": "Hole 2",
+                            "featureType": "hole"
+                        },
+                        "F6OZ41Af1jCYUb2_5": {
+                            "name": "Mate connector 1",
+                            "featureType": "mateConnector"
+                        }
+                    }
                 },
                 "9ed74cb845a37c39b8c6fde5": {
                     "name": "Part Studio 1",

@@ -204,8 +204,11 @@ def _is_derived_master_sketch(api_params: List[Any], did: str, eid: str, fids: L
     """
     for param in api_params: 
         if param['btType'] == "BTMParameterReferencePartStudio-3302": 
-            source_did, _, source_eid, _ = param['namespace'].split("::")
-            if did != source_did[1:] or eid != source_eid[1:]: 
+            namespace = param['namespace'].split("::")
+            for item in namespace: 
+                if item[0] == "e": 
+                    source_eid = item[1:]
+            if eid != source_eid: 
                 return False
             for query in param['partQuery']['queries']: 
                 if query['btType'] == "BTMIndividualCreatedByQuery-137" and query['featureId'] in fids: 
@@ -214,6 +217,11 @@ def _is_derived_master_sketch(api_params: List[Any], did: str, eid: str, fids: L
                     return True # entire part studio imported
                 else: 
                     pass # check next query if the derived feature is importing multiple sketches 
+        elif param['btType'] == "BTMParameterQueryList-148": 
+            for query in param['queries']: 
+                if query['btType'] == "BTMIndividualCreatedByQuery-137": 
+                    if query['featureId'] in fids: 
+                        return True
     return False 
     
 
