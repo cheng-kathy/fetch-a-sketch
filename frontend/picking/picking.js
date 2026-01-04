@@ -21,7 +21,7 @@ export function setupPicking({ renderer, camera, group, tip, onSelect }) {
   // Keep hover state to restore opacity
   let hovered = null;
 
-  // --- helper: NDC from event ---
+  // NDC for event
   function normalizePointer(ev) {
     const rect = renderer.domElement.getBoundingClientRect();
     mouse.x = ((ev.clientX - rect.left) / rect.width) * 2 - 1;
@@ -54,7 +54,7 @@ export function setupPicking({ renderer, camera, group, tip, onSelect }) {
     raycaster.params.Line.threshold = Math.max(wpp * scaledPx, 0.05);
   }
 
-  // --- HOVER: pointermove → highlight + tooltip ---
+  // Hover
   function onPointerMove(ev) {
     normalizePointer(ev);
     setLinePickWidthPixels(8); // tighter hitbox for hover
@@ -87,7 +87,7 @@ export function setupPicking({ renderer, camera, group, tip, onSelect }) {
       tip.style.top = ev.clientY + 'px';
       tip.style.display = 'block';
     } else {
-      // no hit → clear hover + tooltip
+      // no hit : clear hover + tooltip
       if (hovered?.material && hovered.material.isMaterial) {
         hovered.material.opacity = 1;
         hovered.material.transparent = false;
@@ -106,7 +106,7 @@ export function setupPicking({ renderer, camera, group, tip, onSelect }) {
     tip.style.display = 'none';
   }
 
-  // --- CLICK: pointerdown → call onSelect + let main.js thicken line ---
+  // CLICK: pointerdown : call onSelect + let main.js thicken line
   function onPointerDown(ev) {
     if (ev.button !== 0) return; // left only
     ev.stopPropagation();        // don't let window-level handlers eat this
@@ -133,8 +133,7 @@ export function setupPicking({ renderer, camera, group, tip, onSelect }) {
   renderer.domElement.addEventListener('pointermove', onPointerMove);
   renderer.domElement.addEventListener('pointerleave', onPointerLeave);
   renderer.domElement.addEventListener('pointerdown', onPointerDown);
-
-  // optional cleanup API
+  // clean up everything
   function dispose() {
     renderer.domElement.removeEventListener('pointermove', onPointerMove);
     renderer.domElement.removeEventListener('pointerleave', onPointerLeave);
