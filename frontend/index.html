@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>try three</title>
+  <style>html,body{margin:0;height:100%;overflow:hidden}</style>
+</head>
+<body>
+  <!-- Force ESM import from HTML -->
+  <!-- <script type="module" src="deal_data.js"></script> -->
+
+  <script type="module">
+    import './main.js';
+  </script>
+  <button id="refresh-btn" type="button">Refresh</button>
+
+  <style>
+    #refresh-btn {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 8px;
+      background: #848587;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    }
+    #refresh-btn:hover { background: #545557; }
+    #refresh-btn:active { transform: translateY(1px); }
+  </style>
+</body>
+</html>
