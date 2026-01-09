@@ -6728,6 +6728,12 @@
     ],
     "1595qUqRsJoC.bottom": [
       [
+        "71177be97b91bbec367a7897",
+        "e2fe27fe15b29dbd70e62fe4",
+        "472a9a9d360e1376038d5c26",
+        "Fp96jTkpXH1I6vO_21"
+      ],
+      [
         "dacbcaa78d86daf1709b6033",
         "0200cb88ff48bf8b8d0fdcf4",
         "a76c4eae17147a8683fe14c9",
@@ -6765,6 +6771,12 @@
       ]
     ],
     "1595qUqRsJoC.top": [
+      [
+        "71177be97b91bbec367a7897",
+        "e2fe27fe15b29dbd70e62fe4",
+        "472a9a9d360e1376038d5c26",
+        "Fp96jTkpXH1I6vO_21"
+      ],
       [
         "dacbcaa78d86daf1709b6033",
         "0200cb88ff48bf8b8d0fdcf4",
@@ -6804,6 +6816,12 @@
     ],
     "1595qUqRsJoC.left": [
       [
+        "71177be97b91bbec367a7897",
+        "e2fe27fe15b29dbd70e62fe4",
+        "472a9a9d360e1376038d5c26",
+        "Fp96jTkpXH1I6vO_21"
+      ],
+      [
         "dacbcaa78d86daf1709b6033",
         "0200cb88ff48bf8b8d0fdcf4",
         "a76c4eae17147a8683fe14c9",
@@ -6842,6 +6860,12 @@
     ],
     "1595qUqRsJoC.right": [
       [
+        "71177be97b91bbec367a7897",
+        "e2fe27fe15b29dbd70e62fe4",
+        "472a9a9d360e1376038d5c26",
+        "Fp96jTkpXH1I6vO_21"
+      ],
+      [
         "dacbcaa78d86daf1709b6033",
         "0200cb88ff48bf8b8d0fdcf4",
         "a76c4eae17147a8683fe14c9",
@@ -6879,6 +6903,12 @@
       ]
     ],
     "1595qUqRsJoC.middle": [
+      [
+        "71177be97b91bbec367a7897",
+        "e2fe27fe15b29dbd70e62fe4",
+        "472a9a9d360e1376038d5c26",
+        "Fp96jTkpXH1I6vO_21"
+      ],
       [
         "dacbcaa78d86daf1709b6033",
         "0200cb88ff48bf8b8d0fdcf4",
@@ -7505,6 +7535,10 @@
               "name": "Ref",
               "featureType": "mateConnector"
             },
+            "Fp96jTkpXH1I6vO_21": {
+              "name": "Extrude 32",
+              "featureType": "extrude"
+            },
             "FSCXvbOAoltIIFP_22": {
               "name": "Extrude 33",
               "featureType": "extrude"
@@ -7542,7 +7576,7 @@
     },
     "0cac689b5bd09744c13ab024": {
       "wid": "8a2337af88e95d9340ad54b5",
-      "name": "Arm - Copy",
+      "name": "Arm v2",
       "elements": {
         "3d3578019abd755deff2b075": {
           "name": "Part Studio 1",
@@ -7602,11 +7636,6 @@
         }
       }
     },
-    "e66fb56133a19da9c938047d": {
-      "wid": "59cbfcbec725c3a6856c3ce5",
-      "name": "Main Assembly - Copy",
-      "elements": {}
-    },
     "cb857c582d865315c6c41e99": {
       "wid": "be6924e04f113aa0bccf6f84",
       "name": "Drivebase",
@@ -7644,7 +7673,7 @@
     },
     "8f9fe9d204739f5e18c3a028": {
       "wid": "1e1b84a808c45046d9eb0f37",
-      "name": "Arm Gearbox - Copy",
+      "name": "Arm Gearbox",
       "elements": {
         "92636f3646bafd099148b1f8": {
           "name": "Part Studio",
@@ -7671,7 +7700,7 @@
     },
     "dacbcaa78d86daf1709b6033": {
       "wid": "0200cb88ff48bf8b8d0fdcf4",
-      "name": "Claw - Copy",
+      "name": "Claw",
       "elements": {
         "a76c4eae17147a8683fe14c9": {
           "name": "Part Studio 1",
