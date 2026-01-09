@@ -4102,18 +4102,6 @@
         "isConstruction": false,
         "plane_side": "right",
         "featureId": "FCl6CrC001EROBg_0"
-      },
-      "scC4Ey4aSdyu": {
-        "btType": "BTCurveGeometryCircle-115",
-        "radius": 0.23636015140457056,
-        "clockwise": false,
-        "xCenter": -0.7433059215545654,
-        "yCenter": 0.7664468884468079,
-        "xDir": 1.0,
-        "yDir": 0.0,
-        "isConstruction": false,
-        "plane_side": "right",
-        "featureId": "FCl6CrC001EROBg_0"
       }
     }
   ],
@@ -7466,8 +7454,7 @@
     "1urj2ML5VjI3.top": [],
     "1urj2ML5VjI3.left": [],
     "1urj2ML5VjI3.right": [],
-    "XOIOcorAZ5PL": [],
-    "scC4Ey4aSdyu": []
+    "XOIOcorAZ5PL": []
   },
   {
     "56e646580a50f305280bbafc": {
