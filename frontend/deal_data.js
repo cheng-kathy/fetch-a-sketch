@@ -3,7 +3,7 @@ import fallbackData from '../backend/test_output_robot.json';
 
 // Toggle backend vs local JSON. 
 // True for reading from json, false for callin pythong API
-const queryUseLocal = false;
+const queryUseLocal = true;
 function normalizeRaw(raw) {
   const [geoRaw = [], entities_dep = {}, doc_info = {}] = Array.isArray(raw) ? raw : [];
   const sketchGeos = Array.isArray(geoRaw) ? geoRaw : [geoRaw ?? {}];

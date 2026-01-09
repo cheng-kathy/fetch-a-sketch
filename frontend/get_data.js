@@ -1,5 +1,5 @@
 // calls to the python bacnekd.
-const apiBase = "http://127.0.0.1:5000";
+const apiBase = "http://127.0.0.1:5001";
 //make calls to python bacnend
 export async function callPython() {
     const res = await fetch(`${apiBase}/get_dependency`,{

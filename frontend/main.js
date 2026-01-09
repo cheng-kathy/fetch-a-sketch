@@ -138,10 +138,17 @@ export function initVisualizer({
   addAxisPlanes(scene, 30);
 
   const { camera, controls } = initCameraControls(renderer);
-  const viewCube = createViewCube(camera, controls, { size: 200, bottom: 20, right: 20 });
 
   const model = new THREE.Group();
   scene.add(model);
+
+  const viewCube = createViewCube(camera, controls, {
+    size: 200,
+    bottom: 20,
+    right: 20,
+    model: model,
+    fitCameraFn: fitCameraToObject,
+  });
   const group = new THREE.Group();
   group.name = 'entities-group';
   model.add(group);
@@ -239,7 +246,7 @@ export function initVisualizer({
     },
   });
 
-  const axes = new THREE.AxesHelper(200); // shorter axes (was 1000)
+  const axes = new THREE.AxesHelper(70); // shorter axes (was 1000)
   axes.traverse(o => { if (o.material?.color) o.material.color.set(0xbbbbbb); });
   scene.add(axes);
 
@@ -255,7 +262,14 @@ export function initVisualizer({
   animate();
 
   const onResize = () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    const aspect = window.innerWidth / window.innerHeight;
+    if (camera.isOrthographicCamera) {
+      const frustumHeight = camera.top - camera.bottom;
+      camera.left = -frustumHeight * aspect / 2;
+      camera.right = frustumHeight * aspect / 2;
+    } else {
+      camera.aspect = aspect;
+    }
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
     viewCube.resize?.();
@@ -326,7 +340,7 @@ let loadingEl = null;
 function ensureLoadingEl() {
   if (loadingEl) return loadingEl;
   loadingEl = document.createElement('div');
-  loadingEl.textContent = 'Refreshing…';
+  loadingEl.textContent = 'Analyzing references…';
   Object.assign(loadingEl.style, {
     position: 'fixed',
     top: '12px',
@@ -367,7 +381,13 @@ export function wireUpdateButton(selector = '#update-btn') {
 }
 
 // auto-wire a default update/refresh button if present
-document.addEventListener('DOMContentLoaded', () => {
-  wireUpdateButton(); // #update-btn
-  wireUpdateButton('#refresh-btn'); // fallback to #refresh-btn in index.html
-});
+// Handle both cases: DOM still loading OR already loaded (module scripts are deferred)
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    wireUpdateButton();
+    wireUpdateButton('#refresh-btn');
+  });
+} else {
+  wireUpdateButton();
+  wireUpdateButton('#refresh-btn');
+}

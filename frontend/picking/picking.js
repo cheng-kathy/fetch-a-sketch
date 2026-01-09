@@ -18,8 +18,13 @@ export function setupPicking({ renderer, camera, group, tip, onSelect }) {
   const raycaster = new THREE.Raycaster();
   const mouse = new THREE.Vector2();
 
-  // Keep hover state to restore opacity
+  // Keep hover and selected state to restore properties
   let hovered = null;
+  let selected = null;
+  const HOVER_LINEWIDTH_MULTIPLIER = 2;  // Make lines 2x thicker on hover
+  const HOVER_POINT_SIZE_MULTIPLIER = 1.7;  // Make points 1.7x larger on hover
+  const CLICK_LINEWIDTH_MULTIPLIER = 3;  // Make lines 3x thicker when clicked
+  const CLICK_POINT_SIZE_MULTIPLIER = 2.5;  // Make points 2.5x larger when clicked
 
   // NDC for event
   function normalizePointer(ev) {
@@ -54,31 +59,158 @@ export function setupPicking({ renderer, camera, group, tip, onSelect }) {
     raycaster.params.Line.threshold = Math.max(wpp * scaledPx, 0.05);
   }
 
+  // Helper to restore to base size (not click size)
+  function restoreToBase(obj) {
+    if (!obj?.material) return;
+    
+    // Restore opacity
+    if (obj.material.isMaterial) {
+      obj.material.opacity = 1;
+      obj.material.transparent = false;
+    }
+    
+    // Restore linewidth for Line2 to base
+    if (obj.isLine2 && obj.material.linewidth !== undefined) {
+      if (obj.userData.__originalLinewidth !== undefined) {
+        obj.material.linewidth = obj.userData.__originalLinewidth;
+      }
+    }
+    
+    // Restore point size for Points to base
+    if ((obj.isPoints || obj.type === 'Points') && obj.material.size !== undefined) {
+      if (obj.userData.__originalPointSize !== undefined) {
+        obj.material.size = obj.userData.__originalPointSize;
+      }
+    }
+  }
+  
+  // Helper to restore hover (restore to base if not selected, or to click size if selected)
+  function restoreHover(obj) {
+    if (!obj) return;
+    // If this object is selected, restore to click size, otherwise to base
+    if (obj === selected) {
+      applyClick(obj);
+    } else {
+      restoreToBase(obj);
+    }
+  }
+  
+  // Helper to apply hover effects (but don't override click effects)
+  function applyHover(obj) {
+    if (!obj?.material) return;
+    
+    // If object is selected, use click multiplier, otherwise use hover multiplier
+    const isSelected = obj === selected;
+    const lineMultiplier = isSelected ? CLICK_LINEWIDTH_MULTIPLIER : HOVER_LINEWIDTH_MULTIPLIER;
+    const pointMultiplier = isSelected ? CLICK_POINT_SIZE_MULTIPLIER : HOVER_POINT_SIZE_MULTIPLIER;
+    
+    // Store original values if not already stored
+    if (obj.isLine2 && obj.material.linewidth !== undefined) {
+      if (obj.userData.__originalLinewidth === undefined) {
+        obj.userData.__originalLinewidth = obj.material.linewidth;
+      }
+      obj.material.linewidth = obj.userData.__originalLinewidth * lineMultiplier;
+    }
+    
+    if ((obj.isPoints || obj.type === 'Points') && obj.material.size !== undefined) {
+      if (obj.userData.__originalPointSize === undefined) {
+        obj.userData.__originalPointSize = obj.material.size;
+      }
+      obj.material.size = obj.userData.__originalPointSize * pointMultiplier;
+    }
+  }
+  
+  // Helper to apply click effects
+  function applyClick(obj) {
+    if (!obj?.material) return;
+    
+    // Store original values if not already stored
+    if (obj.isLine2 && obj.material.linewidth !== undefined) {
+      if (obj.userData.__originalLinewidth === undefined) {
+        obj.userData.__originalLinewidth = obj.material.linewidth;
+      }
+      obj.material.linewidth = obj.userData.__originalLinewidth * CLICK_LINEWIDTH_MULTIPLIER;
+    }
+    
+    if ((obj.isPoints || obj.type === 'Points') && obj.material.size !== undefined) {
+      if (obj.userData.__originalPointSize === undefined) {
+        obj.userData.__originalPointSize = obj.material.size;
+      }
+      obj.material.size = obj.userData.__originalPointSize * CLICK_POINT_SIZE_MULTIPLIER;
+    }
+  }
+
+  // Helper to set Points threshold for better detection
+  function setPointsThreshold() {
+    if (!raycaster.params.Points) {
+      raycaster.params.Points = {};
+    }
+    // For Points, threshold is in world units
+    // Use a very large threshold to ensure points are easily clickable
+    const distNow = distanceToSketchPlane();
+    const wpp = worldUnitsPerPixelAt(distNow);
+    // Convert point size (7px) to world units and multiply by 10 for generous hit area
+    // This ensures points are easy to click even when small
+    const pointSizeInWorld = wpp * 7;
+    raycaster.params.Points.threshold = Math.max(pointSizeInWorld * 10, 2.0); // minimum 2.0 world units
+  }
+
+  // Helper to manually check Points if raycaster misses them
+  function findNearestPoint(mouse, camera, group) {
+    raycaster.setFromCamera(mouse, camera);
+    const ray = raycaster.ray;
+    
+    let nearestPoint = null;
+    let nearestDistance = Infinity;
+    const threshold = raycaster.params.Points?.threshold || 2.0;
+    
+    group.traverse((obj) => {
+      if ((obj.isPoints || obj.type === 'Points') && obj.geometry) {
+        const pos = obj.geometry.getAttribute('position');
+        if (pos) {
+          const point = new THREE.Vector3(pos.getX(0), pos.getY(0), pos.getZ(0));
+          point.applyMatrix4(obj.matrixWorld);
+          
+          const distance = ray.distanceToPoint(point);
+          if (distance < threshold && distance < nearestDistance) {
+            nearestDistance = distance;
+            nearestPoint = obj;
+          }
+        }
+      }
+    });
+    
+    return nearestPoint;
+  }
+
   // Hover
   function onPointerMove(ev) {
     normalizePointer(ev);
     setLinePickWidthPixels(8); // tighter hitbox for hover
+    setPointsThreshold(); // better point detection
 
     raycaster.setFromCamera(mouse, camera);
-    const hits = raycaster.intersectObjects(group.children, true);
+    let hits = raycaster.intersectObjects(group.children, true);
+    
+    // If no hits, try manual point detection
+    if (hits.length === 0) {
+      const nearestPoint = findNearestPoint(mouse, camera, group);
+      if (nearestPoint) {
+        hits = [{ object: nearestPoint, distance: 0 }];
+      }
+    }
 
     if (hits.length) {
       const obj = hits[0].object;
 
       if (hovered !== obj) {
         // restore previous
-        if (hovered?.material && hovered.material.isMaterial) {
-          hovered.material.opacity = 1;
-          hovered.material.transparent = false;
-        }
+        restoreHover(hovered);
 
         hovered = obj;
 
-        // fade hovered a bit
-        if (obj.material && obj.material.isMaterial) {
-          obj.material.transparent = true;
-          obj.material.opacity = 0.7;
-        }
+        // apply hover effects
+        applyHover(obj);
       }
 
       // tooltip
@@ -88,20 +220,14 @@ export function setupPicking({ renderer, camera, group, tip, onSelect }) {
       tip.style.display = 'block';
     } else {
       // no hit : clear hover + tooltip
-      if (hovered?.material && hovered.material.isMaterial) {
-        hovered.material.opacity = 1;
-        hovered.material.transparent = false;
-      }
+      restoreHover(hovered);
       hovered = null;
       tip.style.display = 'none';
     }
   }
 
   function onPointerLeave() {
-    if (hovered?.material && hovered.material.isMaterial) {
-      hovered.material.opacity = 1;
-      hovered.material.transparent = false;
-    }
+    restoreHover(hovered);
     hovered = null;
     tip.style.display = 'none';
   }
@@ -113,18 +239,45 @@ export function setupPicking({ renderer, camera, group, tip, onSelect }) {
 
     normalizePointer(ev);
     setLinePickWidthPixels(6);  // smaller hitbox for click
+    setPointsThreshold(); // better point detection for clicking
 
     raycaster.setFromCamera(mouse, camera);
-    const hits = raycaster.intersectObjects(group.children, true);
+    let hits = raycaster.intersectObjects(group.children, true);
+    
+    // If no hits, try manual point detection
+    if (hits.length === 0) {
+      const nearestPoint = findNearestPoint(mouse, camera, group);
+      if (nearestPoint) {
+        hits = [{ object: nearestPoint, distance: 0 }];
+      }
+    }
 
     if (!hits.length) {
-      // click on empty space
+      // click on empty space - clear selection
+      if (selected) {
+        restoreToBase(selected);
+        selected = null;
+      }
       onSelect(null, ev.clientX, ev.clientY, null);
       return;
     }
 
     const obj = hits[0].object;
     const id = obj.userData?.label ?? null;
+
+    // Restore previous selection
+    if (selected && selected !== obj) {
+      restoreToBase(selected);
+    }
+    
+    // Set new selection and apply click effects
+    selected = obj;
+    applyClick(obj);
+    
+    // If this object was hovered, update hover to show click size
+    if (hovered === obj) {
+      applyHover(obj); // This will use click multiplier since obj === selected
+    }
 
     onSelect(id, ev.clientX, ev.clientY, obj);
   }
@@ -139,11 +292,12 @@ export function setupPicking({ renderer, camera, group, tip, onSelect }) {
     renderer.domElement.removeEventListener('pointerleave', onPointerLeave);
     renderer.domElement.removeEventListener('pointerdown', onPointerDown);
 
-    if (hovered?.material && hovered.material.isMaterial) {
-      hovered.material.opacity = 1;
-      hovered.material.transparent = false;
-    }
+    restoreHover(hovered);
     hovered = null;
+    if (selected) {
+      restoreToBase(selected);
+      selected = null;
+    }
     tip.style.display = 'none';
   }
 

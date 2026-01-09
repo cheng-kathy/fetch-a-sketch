@@ -1,12 +1,58 @@
 import json 
 import base64
 import zlib 
-import warnings
 import requests 
-from typing import Dict, List, Tuple, Any
+from typing import Dict, List, Tuple, Any 
 
-# Suppress urllib3 OpenSSL/LibreSSL compatibility warning
-warnings.filterwarnings('ignore', message='urllib3 v2 only supports OpenSSL') 
+import re
+import math
+
+def _parse_qty(param):
+    """Return numeric value from a BTMParameterQuantity-147 param (in or deg)."""
+    if param.get("value") is not None:
+        return float(param["value"])
+    expr = (param.get("expression") or "").lower()
+    expr = expr.replace("in", "").replace("deg", "")
+    expr = re.sub(r"[^0-9+.\-*/() ]", "", expr)
+    try:
+        return float(eval(expr))
+    except Exception:
+        return 0.0
+
+def _parse_enum(param):
+    return param.get("value") or ""
+
+def _extract_mate_connectors(api_response):
+    """Returns {featureId: [{name, translation:[x,y,z], rotationType, rotationDeg, originQuery}]}."""
+    out = {}
+    for feat in api_response.get("features", []):
+        f_id = feat.get("featureId")
+        subfs = feat.get("subFeatures") or []
+        connectors = []
+        for sub in subfs:
+            if (sub.get("featureType") or "").lower() != "mateconnector" and sub.get("name") != "Mate connector":
+                continue
+            params = sub.get("parameters", [])
+            t = {"translationX": 0.0, "translationY": 0.0, "translationZ": 0.0,
+                 "rotationType": "", "rotationDeg": 0.0, "originQuery": None, "name": sub.get("name")}
+            for p in params:
+                pid = p.get("parameterId") or ""
+                if pid == "translationX":
+                    t["translationX"] = _parse_qty(p)
+                elif pid == "translationY":
+                    t["translationY"] = _parse_qty(p)
+                elif pid == "translationZ":
+                    t["translationZ"] = _parse_qty(p)
+                elif pid == "rotationType":
+                    t["rotationType"] = _parse_enum(p)
+                elif pid == "rotation":
+                    t["rotationDeg"] = _parse_qty(p)
+                elif pid in ("originQuery", "originQuery1", "query") and p.get("queries"):
+                    t["originQuery"] = p["queries"][0].get("queryString")
+            connectors.append(t)
+        if connectors:
+            out[f_id] = connectors
+    return out
 
 
 with open("APIKey.json") as f: 
@@ -101,6 +147,8 @@ def get_all_elements(did: str, wid: str) -> Tuple[List[str], List[str]]:
     )
     if response.ok: 
         response = response.json() 
+        json.dump(response, open('test_elements.json', 'w'))
+
         eid_list = [ele['id'] for ele in response]
         eid_names = [ele['name'] for ele in response]
         return eid_list, eid_names
@@ -122,6 +170,7 @@ def get_ps_features(did: str, wid: str, eid: str) -> Any:
         }
     )
     if response.ok: 
+        json.dump(response.json(), open('test_features.json', 'w'))
         return response.json() 
     else: 
         print(response.text)
@@ -144,17 +193,49 @@ def _get_sketch_entities(api_response: Dict[str, Any], sketch_name: str) -> Tupl
     sketch_entities = {} # Dict[entityId: Dict[geo_info]]
     for feature in api_response['features']: 
         if feature['name'] == sketch_name: 
+            plane_side = "none"
+            query_strings = []
+            for p in feature.get("parameters", []):
+                if p.get("btType") == "BTMParameterQueryList-148":
+                    for q in p.get("queries", []):
+                        qs = q.get("queryString")
+                        if qs:
+                            query_strings.append(qs)
+
+            for qs in query_strings:
+                qs_lower = qs.lower()
+                if "top" in qs_lower and "plane" in qs_lower:
+                    plane_side = "top"
+                    break
+                if "front" in qs_lower and "plane" in qs_lower:
+                    plane_side = "front"
+                    break
+                if "right" in qs_lower and "plane" in qs_lower:
+                    plane_side = "right"
+                    break
+
             for entity in feature['entities']: 
                 if entity['btType'] == 'BTMSketchPoint-158': # special case 
                     sketch_entities[entity['entityId']] = {
                         'btType': entity['btType'], 
                         'y': entity['y'], 
                         'x': entity['x'], 
-                        'isConstruction': entity['isConstruction']
+                        'isConstruction': entity['isConstruction'],
+                        'plane_side': plane_side,
+                        'featureId': feature.get('featureId')
                     }
                 else: 
                     sketch_entities[entity['entityId']] = entity['geometry'] 
                     sketch_entities[entity['entityId']]['isConstruction'] = entity['isConstruction']
+                    sketch_entities[entity['entityId']]["plane_side"] = plane_side
+                    sketch_entities[entity['entityId']]["featureId"] = feature.get('featureId')
+
+                    # carry over trim parameters so JS can render finite segments
+                    if 'startParam' in entity:
+                        sketch_entities[entity['entityId']]['startParam'] = entity['startParam']
+                    if 'endParam' in entity:
+                        sketch_entities[entity['entityId']]['endParam'] = entity['endParam']
+                    
             return feature['featureId'], sketch_entities
     # If no matching master sketches found 
     raise ValueError("Given master sketch name \"{}\" not found".format(sketch_name))
@@ -169,15 +250,15 @@ def _search_ref_entities(api_params: List[Any], sketch_ids: List[str]) -> List[s
         sketch_ids (List[str]): a list of featureIds of master sketches. 
 
     Returns:
-        List[str]: a list of base entityId prefixes (12 chars) that are referenced in this feature.
-            These need to be matched against entities_dep keys using prefix matching,
-            since full entityIds can have suffixes like .bottom, .top, .parallel.1, etc.
+        List[str]: a list of (possible) entityIds that are referenced in this feature. 
+            The list may contain non-entityIds that would require additional checking 
+            with the dictionary of known entityIds. 
     """
-    ref_entity_bases = [] 
+    ref_entities = [] 
     for param in api_params: 
         if param['btType'] == "BTMParameterArray-2025":
             sub_params = [item['parameters'] for item in param['items']]
-            ref_entity_bases.extend(_search_ref_entities([item for sublist in sub_params for item in sublist], sketch_ids))
+            ref_entities.extend(_search_ref_entities([item for sublist in sub_params for item in sublist], sketch_ids))
         elif param['btType'] == "BTMParameterQueryList-148": 
             for query in param['queries']: 
                 if "query=qCompressed" in query['queryString']: 
@@ -188,32 +269,10 @@ def _search_ref_entities(api_params: List[Any], sketch_ids: List[str]) -> List[s
                     for sketch_id in sketch_ids:
                         if sketch_id in q_string: 
                             for item in q_string.split("$"): 
-                                if len(item) >= 12:
-                                    ref_entity_bases.append(item[:12]) # base entityId prefix
+                                ref_entities.append(item[:12]) # possible entityId
                             break 
-    ref_entity_bases = list(set(ref_entity_bases)) # remove duplicates
-    return ref_entity_bases
-
-
-def _match_entity_by_prefix(entity_base: str, entities_dep: Dict[str, List]) -> List[str]:
-    """Find all entityIds in entities_dep that match the given base prefix.
-    
-    EntityIds can be either exactly 12 chars (e.g., 'BTw0Oed29F1g') or 
-    12 chars followed by suffixes (e.g., 's5hilxbj2scx.bottom', 's5hilxbj2scx.parallel.1').
-    
-    Args:
-        entity_base (str): 12-character base prefix to match.
-        entities_dep (Dict[str, List]): dictionary of full entityIds to their dependencies.
-    
-    Returns:
-        List[str]: list of matching full entityIds.
-    """
-    matches = []
-    for full_entity_id in entities_dep:
-        # Check if the full entityId starts with the base (handles both exact match and suffix cases)
-        if full_entity_id == entity_base or full_entity_id.startswith(entity_base + "."):
-            matches.append(full_entity_id)
-    return matches
+    ref_entities = list(set(ref_entities)) # remove duplicates
+    return ref_entities
 
 
 def _is_derived_master_sketch(api_params: List[Any], did: str, eid: str, fids: List[str]) -> bool: 
@@ -274,7 +333,9 @@ def get_dependency(did: str, wid: str, eid: str, master_sketches: List[str]):
                       # Every dependent feature is in the form: [did, wid, eid, fid]
     
     # Retrieve all sketch entities in the master sketch 
-    source_ps = get_ps_features(did, wid, eid) 
+    source_ps = get_ps_features(did, wid, eid)
+    mate_connectors = _extract_mate_connectors(source_ps)
+ 
     master_sketch_ids = [] 
     for master_sketch in master_sketches:
         master_sketch_id, geo_dict = _get_sketch_entities(source_ps, master_sketch) 
@@ -300,12 +361,12 @@ def get_dependency(did: str, wid: str, eid: str, master_sketches: List[str]):
             q_searching = True # start checking query string from now on 
             doc_info[did]['elements'][eid]['features'][feature['featureId']] = {'name': feature['name'], 'featureType': feature['featureType']}
         elif q_searching and feature['btType'] == "BTMFeature-134" and feature['featureType'] != 'importDerived': # ignore sketches
-            ref_entity_bases = _search_ref_entities(feature['parameters'], master_sketch_ids)
-            if ref_entity_bases: 
+            ref_entities = _search_ref_entities(feature['parameters'], master_sketch_ids)
+            if ref_entities: 
                 doc_info[did]['elements'][eid]['features'][feature['featureId']] = {'name': feature['name'], 'featureType': feature['featureType']}
-            for entity_base in ref_entity_bases: 
-                for full_entity_id in _match_entity_by_prefix(entity_base, entities_dep):
-                    entities_dep[full_entity_id].append((did, wid, eid, feature['featureId']))
+            for entity in ref_entities: 
+                if entity in entities_dep: 
+                    entities_dep[entity].append((did, wid, eid, feature['featureId']))
     
     # From the same document but different elements 
     eid_list, ele_names = get_all_elements(did, wid)
@@ -322,12 +383,12 @@ def get_dependency(did: str, wid: str, eid: str, master_sketches: List[str]):
                 if feature['featureType'] == "importDerived": 
                     q_searching = _is_derived_master_sketch(feature['parameters'], did, eid, master_sketch_ids)
             elif feature['btType'] == "BTMFeature-134" and feature['featureType'] != 'importDerived': # ignore sketches
-                ref_entity_bases = _search_ref_entities(feature['parameters'], master_sketch_ids)
-                if ref_entity_bases: 
+                ref_entities = _search_ref_entities(feature['parameters'], master_sketch_ids)
+                if ref_entities: 
                     doc_info[did]['elements'][eid_list[ele_ind]]['features'][feature['featureId']] = {'name': feature['name'], 'featureType': feature['featureType']}
-                for entity_base in ref_entity_bases: 
-                    for full_entity_id in _match_entity_by_prefix(entity_base, entities_dep):
-                        entities_dep[full_entity_id].append((did, wid, eid_list[ele_ind], feature['featureId']))
+                for entity in ref_entities: 
+                    if entity in entities_dep: 
+                        entities_dep[entity].append((did, wid, eid_list[ele_ind], feature['featureId']))
     
     # From every other document in the same folder 
     folder_id = get_folder(did)
@@ -353,14 +414,14 @@ def get_dependency(did: str, wid: str, eid: str, master_sketches: List[str]):
                     if feature['featureType'] == "importDerived": 
                         q_searching = _is_derived_master_sketch(feature['parameters'], did, eid, master_sketch_ids)
                 elif feature['btType'] == "BTMFeature-134" and feature['featureType'] != 'importDerived': # ignore sketches 
-                    ref_entity_bases = _search_ref_entities(feature['parameters'], master_sketch_ids)
-                    if ref_entity_bases: 
+                    ref_entities = _search_ref_entities(feature['parameters'], master_sketch_ids)
+                    if ref_entities: 
                         doc_info[did_list[doc_ind]]['elements'][eid_list[ele_ind]]['features'][feature['featureId']] = {'name': feature['name'], 'featureType': feature['featureType']}
-                    for entity_base in ref_entity_bases: 
-                        for full_entity_id in _match_entity_by_prefix(entity_base, entities_dep):
-                            entities_dep[full_entity_id].append((did_list[doc_ind], wid_list[doc_ind], eid_list[ele_ind], feature['featureId']))
+                    for entity in ref_entities: 
+                        if entity in entities_dep: 
+                            entities_dep[entity].append((did_list[doc_ind], wid_list[doc_ind], eid_list[ele_ind], feature['featureId']))
     
-    return entities_geo, entities_dep, doc_info
+    return entities_geo, entities_dep, doc_info, mate_connectors
 
 
 if __name__ == "__main__": 
@@ -372,9 +433,9 @@ if __name__ == "__main__":
     
     # Master doc: https://cad.onshape.com/documents/56e646580a50f305280bbafc/w/5a99299fc7972f9cefe014a6/e/482f1ae4627799170e6a9a4e
     # Folder ID: 514f41dd2f31f68c801bfeaa
-    entities_geo, entities_dep, doc_info = get_dependency(
+    entities_geo, entities_dep, doc_info,  mate_connectors= get_dependency(
         '56e646580a50f305280bbafc', '5a99299fc7972f9cefe014a6', '482f1ae4627799170e6a9a4e', 
         ['Drivebase Top', 'Drivebase Side', 'Reef', 'Substation', 'Arm', 'Hopper', 'Frame Side', 'Claw Sketch', 'Front Home Coral', 'Coral Grabber', 'Chain Plan', 'Tube Sketch']
     )
-    results = [entities_geo, entities_dep, doc_info]
-    json.dump(results, open('test_output_robot.json', 'w'), indent=2)
+    results = [entities_geo, entities_dep, doc_info, mate_connectors]
+    json.dump(results, open('test_output_robot.json', 'w'))

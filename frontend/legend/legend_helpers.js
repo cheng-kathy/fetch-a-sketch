@@ -56,8 +56,9 @@ export function bakeBaseColors(group, globalMin, globalMax) {
   group.traverse(o => {
     const isLine =
       o.isLine || o.isLineLoop || o.type === 'Line' || o.type === 'LineLoop';
-    const isDot = o.isMesh && o.userData?.label; // treat BTMSketchPoint dots as selectable
-    if ((!isLine && !isDot) || !o.material?.color) return;
+    const isLine2 = o.isLine2 || o.type === 'Line2';
+    const isDot = (o.isPoints || o.type === 'Points') && o.userData?.label; // treat BTMSketchPoint dots as selectable
+    if ((!isLine && !isDot && !isLine2) || !o.material?.color) return;
 
     const dep = o.userData?.dependencies ?? 0;
     const css = colorForDependencies(dep, globalMin, globalMax);
@@ -82,8 +83,9 @@ export function makeApplyRangeHighlight(group) {
     group.traverse(obj => {
       const isLine =
         obj.isLine || obj.isLineLoop || obj.type === 'Line' || obj.type === 'LineLoop';
-      const isDot = obj.isMesh && obj.userData?.label;
-      if ((!isLine && !isDot) || obj.isLine2 || !obj.material?.color) return;
+      const isLine2 = obj.isLine2 || obj.type === 'Line2';
+      const isDot = (obj.isPoints || obj.type === 'Points') && obj.userData?.label;
+      if ((!isLine && !isDot && !isLine2) || !obj.material?.color) return;
 
       const dep = obj.userData?.dependencies;
       if (dep == null) return;
@@ -98,7 +100,7 @@ export function makeApplyRangeHighlight(group) {
       } else {
         obj.material.color.setHex(OUT_GRAY);
         obj.material.transparent = true;
-        obj.material.opacity = 0.85;
+        obj.material.opacity = 0.3;  // More faded for out-of-range
         obj.renderOrder = 1;
       }
     });

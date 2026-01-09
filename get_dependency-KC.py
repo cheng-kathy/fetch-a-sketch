@@ -5,8 +5,61 @@ import warnings
 import requests 
 from typing import Dict, List, Tuple, Any
 
+import re
+import math
+
 # Suppress urllib3 OpenSSL/LibreSSL compatibility warning
 warnings.filterwarnings('ignore', message='urllib3 v2 only supports OpenSSL') 
+
+
+def _parse_qty(param):
+    """Return numeric value from a BTMParameterQuantity-147 param (in or deg)."""
+    if param.get("value") is not None:
+        return float(param["value"])
+    expr = (param.get("expression") or "").lower()
+    expr = expr.replace("in", "").replace("deg", "")
+    expr = re.sub(r"[^0-9+.\-*/() ]", "", expr)
+    try:
+        return float(eval(expr))
+    except Exception:
+        return 0.0
+
+
+def _parse_enum(param):
+    return param.get("value") or ""
+
+
+def _extract_mate_connectors(api_response):
+    """Returns {featureId: [{name, translation:[x,y,z], rotationType, rotationDeg, originQuery}]}."""
+    out = {}
+    for feat in api_response.get("features", []):
+        f_id = feat.get("featureId")
+        subfs = feat.get("subFeatures") or []
+        connectors = []
+        for sub in subfs:
+            if (sub.get("featureType") or "").lower() != "mateconnector" and sub.get("name") != "Mate connector":
+                continue
+            params = sub.get("parameters", [])
+            t = {"translationX": 0.0, "translationY": 0.0, "translationZ": 0.0,
+                 "rotationType": "", "rotationDeg": 0.0, "originQuery": None, "name": sub.get("name")}
+            for p in params:
+                pid = p.get("parameterId") or ""
+                if pid == "translationX":
+                    t["translationX"] = _parse_qty(p)
+                elif pid == "translationY":
+                    t["translationY"] = _parse_qty(p)
+                elif pid == "translationZ":
+                    t["translationZ"] = _parse_qty(p)
+                elif pid == "rotationType":
+                    t["rotationType"] = _parse_enum(p)
+                elif pid == "rotation":
+                    t["rotationDeg"] = _parse_qty(p)
+                elif pid in ("originQuery", "originQuery1", "query") and p.get("queries"):
+                    t["originQuery"] = p["queries"][0].get("queryString")
+            connectors.append(t)
+        if connectors:
+            out[f_id] = connectors
+    return out
 
 
 with open("APIKey.json") as f: 
@@ -144,17 +197,49 @@ def _get_sketch_entities(api_response: Dict[str, Any], sketch_name: str) -> Tupl
     sketch_entities = {} # Dict[entityId: Dict[geo_info]]
     for feature in api_response['features']: 
         if feature['name'] == sketch_name: 
+            plane_side = "none"
+            query_strings = []
+            for p in feature.get("parameters", []):
+                if p.get("btType") == "BTMParameterQueryList-148":
+                    for q in p.get("queries", []):
+                        qs = q.get("queryString")
+                        if qs:
+                            query_strings.append(qs)
+
+            for qs in query_strings:
+                qs_lower = qs.lower()
+                if "top" in qs_lower and "plane" in qs_lower:
+                    plane_side = "top"
+                    break
+                if "front" in qs_lower and "plane" in qs_lower:
+                    plane_side = "front"
+                    break
+                if "right" in qs_lower and "plane" in qs_lower:
+                    plane_side = "right"
+                    break
+
             for entity in feature['entities']: 
                 if entity['btType'] == 'BTMSketchPoint-158': # special case 
                     sketch_entities[entity['entityId']] = {
                         'btType': entity['btType'], 
                         'y': entity['y'], 
                         'x': entity['x'], 
-                        'isConstruction': entity['isConstruction']
+                        'isConstruction': entity['isConstruction'],
+                        'plane_side': plane_side,
+                        'featureId': feature.get('featureId')
                     }
                 else: 
                     sketch_entities[entity['entityId']] = entity['geometry'] 
                     sketch_entities[entity['entityId']]['isConstruction'] = entity['isConstruction']
+                    sketch_entities[entity['entityId']]["plane_side"] = plane_side
+                    sketch_entities[entity['entityId']]["featureId"] = feature.get('featureId')
+
+                    # carry over trim parameters so JS can render finite segments
+                    if 'startParam' in entity:
+                        sketch_entities[entity['entityId']]['startParam'] = entity['startParam']
+                    if 'endParam' in entity:
+                        sketch_entities[entity['entityId']]['endParam'] = entity['endParam']
+                    
             return feature['featureId'], sketch_entities
     # If no matching master sketches found 
     raise ValueError("Given master sketch name \"{}\" not found".format(sketch_name))
@@ -267,14 +352,17 @@ def get_dependency(did: str, wid: str, eid: str, master_sketches: List[str]):
     Returns:
         entities_geo (List[Dict[entityId: Dict[geo_info]]]): a list of geometric information for rendering individual entities; 
         entities_dep (Dict[entityId: List[dep_features]]): a list of downstream dependent features for every sketch entity; 
-        doc_info (Dict[did: info]): user-defined document information for presentation (see detailed specifications below). 
+        doc_info (Dict[did: info]): user-defined document information for presentation (see detailed specifications below);
+        mate_connectors (Dict[featureId: List[connector_info]]): mate connector data extracted from features.
     """
     entities_geo = [] # List[Dict[entityId: Dict[geo_info]]]
     entities_dep = {} # Dict[entityId: List[dependent_features]]
                       # Every dependent feature is in the form: [did, wid, eid, fid]
     
     # Retrieve all sketch entities in the master sketch 
-    source_ps = get_ps_features(did, wid, eid) 
+    source_ps = get_ps_features(did, wid, eid)
+    mate_connectors = _extract_mate_connectors(source_ps)
+    
     master_sketch_ids = [] 
     for master_sketch in master_sketches:
         master_sketch_id, geo_dict = _get_sketch_entities(source_ps, master_sketch) 
@@ -360,21 +448,22 @@ def get_dependency(did: str, wid: str, eid: str, master_sketches: List[str]):
                         for full_entity_id in _match_entity_by_prefix(entity_base, entities_dep):
                             entities_dep[full_entity_id].append((did_list[doc_ind], wid_list[doc_ind], eid_list[ele_ind], feature['featureId']))
     
-    return entities_geo, entities_dep, doc_info
+    return entities_geo, entities_dep, doc_info, mate_connectors
 
 
 if __name__ == "__main__": 
     # Master doc: https://cad.onshape.com/documents/85b058cdb321e64ab5d1f364/w/a54015e3085683ae412da7b1/e/78ac040ab4d3dfed2febd8a3
     # Folder ID: 6c38524bec94c0e6eb7f532f
-    # entities_geo, entities_dep, doc_info = get_dependency('85b058cdb321e64ab5d1f364', 'a54015e3085683ae412da7b1', '78ac040ab4d3dfed2febd8a3', ['Master Sketch'])
-    # results = [entities_geo, entities_dep, doc_info]
-    # json.dump(results, open('test_output_spray.json', 'w'))
+    # entities_geo, entities_dep, doc_info, mate_connectors = get_dependency('85b058cdb321e64ab5d1f364', 'a54015e3085683ae412da7b1', '78ac040ab4d3dfed2febd8a3', ['Master Sketch'])
+    # results = [entities_geo, entities_dep, doc_info, mate_connectors]
+    # json.dump(results, open('test_output_spray.json', 'w'), indent=2)
     
     # Master doc: https://cad.onshape.com/documents/56e646580a50f305280bbafc/w/5a99299fc7972f9cefe014a6/e/482f1ae4627799170e6a9a4e
     # Folder ID: 514f41dd2f31f68c801bfeaa
-    entities_geo, entities_dep, doc_info = get_dependency(
+    entities_geo, entities_dep, doc_info, mate_connectors = get_dependency(
         '56e646580a50f305280bbafc', '5a99299fc7972f9cefe014a6', '482f1ae4627799170e6a9a4e', 
         ['Drivebase Top', 'Drivebase Side', 'Reef', 'Substation', 'Arm', 'Hopper', 'Frame Side', 'Claw Sketch', 'Front Home Coral', 'Coral Grabber', 'Chain Plan', 'Tube Sketch']
     )
-    results = [entities_geo, entities_dep, doc_info]
+    results = [entities_geo, entities_dep, doc_info, mate_connectors]
     json.dump(results, open('test_output_robot.json', 'w'), indent=2)
+

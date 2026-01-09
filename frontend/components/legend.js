@@ -5,9 +5,9 @@ export function createColorLegend({
   max = 10,
   width = 18,          // bar width (px)
   height = 240,        // bar height (px)
-  topLabel = 'most used',
-  bottomLabel = 'least used',
-  position = { right: '12px', top: '60px' },
+  topLabel = 'most dependencies',
+  bottomLabel = 'least dependencies',
+  position = { right: '18px', top: '60px' },
   container = document.body,
   initialLo = min,     // bottom handle (min)
   initialHi = max,     // top handle (max)

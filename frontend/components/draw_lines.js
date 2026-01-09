@@ -6,10 +6,33 @@ import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
 
 const INCH = 0.0254;
 
+// Create a circular texture for round point rendering
+let _circleTexture = null;
+function createCircleTexture() {
+  if (_circleTexture) return _circleTexture;
+  
+  const size = 64;
+  const canvas = document.createElement('canvas');
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  
+  // Draw filled circle
+  ctx.beginPath();
+  ctx.arc(size / 2, size / 2, size / 2 - 2, 0, Math.PI * 2);
+  ctx.fillStyle = 'white';
+  ctx.fill();
+  
+  _circleTexture = new THREE.CanvasTexture(canvas);
+  return _circleTexture;
+}
+
 export function makeDrawer({
   group, SCALE, Z_PLANE,
   matLineStraight, matLineCircle, matLineSpline,
   getMaterialForEntity = null,
+  renderer = null,
+  lineWidth = 1.5,  // default line width for thick lines
 }) {
   // hard-coded mate connector transforms 
   const mateTransforms = {
@@ -86,9 +109,33 @@ export function makeDrawer({
     return out;
   }
 
+  // Get renderer resolution for LineMaterial
+  function getResolution() {
+    if (renderer) {
+      const size = new THREE.Vector2();
+      renderer.getSize(size);
+      return size;
+    }
+    return new THREE.Vector2(window.innerWidth, window.innerHeight);
+  }
+
   function addLine3(A3, B3, material, meta) {
-    const g = new THREE.BufferGeometry().setFromPoints([A3, B3]);
-    const line = new THREE.Line(g, material);
+    // Use Line2 for thick lines
+    const positions = [A3.x, A3.y, A3.z, B3.x, B3.y, B3.z];
+    const geo = new LineGeometry();
+    geo.setPositions(positions);
+    
+    const color = material?.color?.getHex?.() ?? (material?.color ?? 0xffffff);
+    const mat2 = new LineMaterial({
+      color: color,
+      linewidth: lineWidth,
+      resolution: getResolution(),
+      transparent: material?.transparent ?? false,
+      opacity: material?.opacity ?? 1.0,
+    });
+    
+    const line = new Line2(geo, mat2);
+    line.computeLineDistances();
     line.renderOrder = 1;
     line.userData = { ...(line.userData||{}), ...meta };
     group.add(line);
@@ -96,12 +143,29 @@ export function makeDrawer({
   }
 
   function addPolyline3(points3, closed, material, meta) {
-    const g = new THREE.BufferGeometry().setFromPoints(points3);
-    const obj = closed ? new THREE.LineLoop(g, material) : new THREE.Line(g, material);
-    obj.renderOrder = 1;
-    obj.userData = { ...(obj.userData||{}), ...meta };
-    group.add(obj);
-    return obj;
+    // Use Line2 for thick lines
+    const pts = closed ? [...points3, points3[0]] : points3;
+    const positions = [];
+    pts.forEach(p => positions.push(p.x, p.y, p.z));
+    
+    const geo = new LineGeometry();
+    geo.setPositions(positions);
+    
+    const color = material?.color?.getHex?.() ?? (material?.color ?? 0xffffff);
+    const mat2 = new LineMaterial({
+      color: color,
+      linewidth: lineWidth,
+      resolution: getResolution(),
+      transparent: material?.transparent ?? false,
+      opacity: material?.opacity ?? 1.0,
+    });
+    
+    const line = new Line2(geo, mat2);
+    line.computeLineDistances();
+    line.renderOrder = 1;
+    line.userData = { ...(line.userData||{}), ...meta };
+    group.add(line);
+    return line;
   }
 
   function drawEntity(entity) {
@@ -121,14 +185,30 @@ export function makeDrawer({
 
     if (g.btType === 'BTMSketchPoint-158') {
       const P3 = mapPoint(new THREE.Vector2((g.x ?? 0) * SCALE, (g.y ?? 0) * SCALE));
-      const size = SCALE * 0.00003; // base radius; may be rescaled later
-      const geo = new THREE.SphereGeometry(size, 12, 12);
+      const pointSize = 7;  // ← Base size (slightly larger than original 6)
+      
+      // Use Points with sizeAttenuation:false so dots stay same screen size when zooming
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.Float32BufferAttribute([P3.x, P3.y, P3.z], 3));
+      
       const mat = getMaterialForEntity?.(entity) ?? matLineStraight;
-      const mesh = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: mat.color || 0x333333 }));
-      mesh.position.copy(P3);
-      mesh.renderOrder = 2;
-      mesh.userData = { ...(mesh.userData || {}), ...meta, __dotBaseRadius: size };
-      group.add(mesh);
+      const color = mat?.color?.getHex?.() ?? (mat?.color ?? 0x333333);
+      
+      // Create circular texture for round dots
+      const circleTexture = createCircleTexture();
+      const pointMat = new THREE.PointsMaterial({
+        color: color,
+        size: pointSize,
+        sizeAttenuation: false,  // keeps size constant regardless of zoom
+        map: circleTexture,
+        transparent: true,
+        alphaTest: 0.5,
+      });
+      
+      const points = new THREE.Points(geo, pointMat);
+      points.renderOrder = 2;
+      points.userData = { ...(points.userData || {}), ...meta };
+      group.add(points);
       return;
     }
 

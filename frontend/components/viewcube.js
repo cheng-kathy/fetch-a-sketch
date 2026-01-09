@@ -6,6 +6,8 @@ export function createViewCube(mainCamera, controls, {
   bottom = 12,
   right = 12,
   faceFont = 'bold 20px system-ui',
+  model = null,
+  fitCameraFn = null,
 } = {}) {
   const WORLD_UP = new THREE.Vector3(0, 0, 1);
   // ----- overlay renderer -----
@@ -23,6 +25,44 @@ export function createViewCube(mainCamera, controls, {
   });
   document.body.appendChild(overlay.domElement);
 
+  // Reset view button (above the viewcube)
+  const resetBtn = document.createElement('button');
+  resetBtn.textContent = '⌂';
+  Object.assign(resetBtn.style, {
+    position: 'fixed',
+    bottom: `${bottom + size + 1}px`,
+    right: `${right + size / 2 - 16}px`,
+    width: '32px',
+    height: '32px',
+    borderRadius: '6px',
+    border: '1px solid #ccc',
+    background: '#fff',
+    cursor: 'pointer',
+    fontSize: '18px',
+    zIndex: 1002,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  });
+  resetBtn.title = 'Reset to isometric view';
+  resetBtn.addEventListener('click', () => {
+    if (!model || !fitCameraFn) return;
+    
+    // Set camera to isometric direction first
+    const currentTarget = controls?.target?.clone() ?? new THREE.Vector3();
+    const currentDist = mainCamera.position.distanceTo(currentTarget) || 10;
+    const isoDir = new THREE.Vector3(1, -1, 1).normalize();
+    mainCamera.position.copy(currentTarget).addScaledVector(isoDir, currentDist);
+    mainCamera.up.set(0, 0, 1);
+    mainCamera.lookAt(currentTarget);
+    mainCamera.updateProjectionMatrix();
+    if (controls) controls.update();
+    
+    // Now call fitCameraFn which handles everything
+    fitCameraFn(mainCamera, model, controls, 1.3);
+  });
+  document.body.appendChild(resetBtn);
+
   // new mini scene 
   const scene = new THREE.Scene();
   const cam = new THREE.PerspectiveCamera(50, 1, 0.1, 10);
@@ -32,23 +72,90 @@ export function createViewCube(mainCamera, controls, {
   const pivot = new THREE.Object3D();
   scene.add(pivot);
 
-  // Cube with labeled faces
+  // Cube with labeled faces (all grey)
   const geom = new THREE.BoxGeometry(1, 1, 1);
+  const grey = '#888888';
+  const greyDark = '#777777';
   const cube = new THREE.Mesh(geom, [
-    faceMat('YZ', '#e74c3c', faceFont, Math.PI / 2),  // +X
-    faceMat('YZ', '#c0392b', faceFont, Math.PI / 2),  // -X
-    faceMat('XZ', '#2ecc71', faceFont, 0),            // +Y
-    faceMat('XZ', '#27ae60', faceFont, 0),            // -Y
-    faceMat('XY', '#3498db', faceFont, 0),            // +Z
-    faceMat('XY', '#2980b9', faceFont, 0),            // -Z
+    faceMat('Right', grey, faceFont, Math.PI / 2),       // +X
+    faceMat('Left', greyDark, faceFont, -Math.PI / 2),   // -X
+    faceMat('Back', grey, faceFont, Math.PI),            // +Y
+    faceMat('Front', greyDark, faceFont, 0),             // -Y
+    faceMat('Top', grey, faceFont, 0),                   // +Z
+    faceMat('Bottom', greyDark, faceFont, Math.PI),      // -Z
   ]);
   pivot.add(cube);
 
   // Outline edges
   pivot.add(new THREE.LineSegments(
     new THREE.EdgesGeometry(geom),
-    new THREE.LineBasicMaterial({ color: 0x111111 })
+    new THREE.LineBasicMaterial({ color: 0x333333 })
   ));
+
+  // Custom thick colored axes at corner with labels
+  const axisLength = 1.2;  // 20% longer than cube side
+  const axisRadius = 0.02; // thick lines
+  const cornerPos = new THREE.Vector3(-0.5, -0.5, -0.5);
+
+  function createAxis(dir, color, label) {
+    const group = new THREE.Group();
+    
+    // Cylinder for the axis line
+    const cylGeom = new THREE.CylinderGeometry(axisRadius, axisRadius, axisLength, 8);
+    const cylMat = new THREE.MeshBasicMaterial({ color });
+    const cyl = new THREE.Mesh(cylGeom, cylMat);
+    
+    // Rotate and position cylinder to point along axis
+    if (dir === 'x') {
+      cyl.rotation.z = -Math.PI / 2;
+      cyl.position.set(axisLength / 2, 0, 0);
+    } else if (dir === 'y') {
+      cyl.position.set(0, axisLength / 2, 0);
+    } else {
+      cyl.rotation.x = Math.PI / 2;
+      cyl.position.set(0, 0, axisLength / 2);
+    }
+    group.add(cyl);
+
+    // Cone arrowhead
+    const coneGeom = new THREE.ConeGeometry(axisRadius * 2.5, axisRadius * 6, 8);
+    const cone = new THREE.Mesh(coneGeom, cylMat);
+    if (dir === 'x') {
+      cone.rotation.z = -Math.PI / 2;
+      cone.position.set(axisLength, 0, 0);
+    } else if (dir === 'y') {
+      cone.position.set(0, axisLength, 0);
+    } else {
+      cone.rotation.x = Math.PI / 2;
+      cone.position.set(0, 0, axisLength);
+    }
+    group.add(cone);
+
+    // Text label sprite
+    const canvas = document.createElement('canvas');
+    canvas.width = 64; canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#' + new THREE.Color(color).getHexString();
+    ctx.font = 'bold 48px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(label, 32, 32);
+    const tex = new THREE.CanvasTexture(canvas);
+    const spriteMat = new THREE.SpriteMaterial({ map: tex, transparent: true });
+    const sprite = new THREE.Sprite(spriteMat);
+    sprite.scale.set(0.28, 0.28, 1);
+    if (dir === 'x') sprite.position.set(axisLength + 0.25, 0, 0);
+    else if (dir === 'y') sprite.position.set(0, axisLength + 0.25, 0);
+    else sprite.position.set(0, 0, axisLength + 0.25);
+    group.add(sprite);
+
+    group.position.copy(cornerPos);
+    return group;
+  }
+
+  pivot.add(createAxis('x', 0xff0000, 'X'));
+  pivot.add(createAxis('y', 0x00cc00, 'Y'));
+  pivot.add(createAxis('z', 0x0066ff, 'Z'));
 
   scene.add(new THREE.AmbientLight(0xffffff, 0.9));
 
@@ -137,19 +244,28 @@ export function createViewCube(mainCamera, controls, {
 
   // ----- helpers -----
   function snapToAxis(axis) {
-    const target = controls?.target ?? new THREE.Vector3(0, 0, 0);
-    const dist = mainCamera.position.distanceTo(target);
+    if (!model || !fitCameraFn) return;
+    
+    // Get current target or origin
+    const currentTarget = controls?.target?.clone() ?? new THREE.Vector3();
+    const currentDist = mainCamera.position.distanceTo(currentTarget) || 10;
+    
+    // Position camera along the axis direction
     const dir = axis.clone().normalize();
-    mainCamera.position.copy(target).addScaledVector(dir, dist);
-    // Keep world Z as up for orthogonal views, if looking straight down/up Z, fall back to Y
+    mainCamera.position.copy(currentTarget).addScaledVector(dir, currentDist);
+    
+    // Set camera up vector
     if (Math.abs(dir.dot(WORLD_UP)) < 0.99) {
       mainCamera.up.copy(WORLD_UP);
     } else {
       mainCamera.up.set(0, 1, 0);
     }
-    mainCamera.lookAt(target);
+    mainCamera.lookAt(currentTarget);
     mainCamera.updateProjectionMatrix();
     if (controls) controls.update();
+    
+    // Now call fitCameraFn which has the proper LineGeometry handling
+    fitCameraFn(mainCamera, model, controls, 1.3);
   }
 
   function faceAxisFromIndex(i) {
@@ -226,6 +342,7 @@ export function createViewCube(mainCamera, controls, {
   function dispose() {
     overlay.dispose();
     overlay.domElement.remove();
+    resetBtn.remove();
     window.removeEventListener('pointermove', onPointerMove);
     window.removeEventListener('pointerup', onPointerUp);
   }

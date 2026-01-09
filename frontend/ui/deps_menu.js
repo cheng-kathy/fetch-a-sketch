@@ -87,7 +87,10 @@ export function showDependenciesMenu({ ctxMenu, entityId, screenX, screenY, enti
   const title = document.createElement('div');
   title.innerHTML = `<strong>Entity:</strong> ${entityId}`;
   const subtitle = document.createElement('div');
-  subtitle.textContent = 'Dependencies:'; subtitle.style.marginTop = '4px';
+  const totalDeps = deps.length;
+  const numDocs = grouped.size;
+  subtitle.textContent = `${totalDeps} dependenc${totalDeps === 1 ? 'y' : 'ies'} across ${numDocs} document${numDocs === 1 ? '' : 's'}`;
+  subtitle.style.marginTop = '4px';
 
   const cols = document.createElement('div');
   Object.assign(cols.style, { display: 'flex', gap: '8px', marginTop: '6px' });

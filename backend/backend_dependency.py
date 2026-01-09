@@ -819,44 +819,22 @@ def get_dependency(did: str, wid: str, eid: str, master_sketches: List[str]):
     
     return entities_geo, entities_dep, doc_info, mate_connectors
 
-# the endpoint
+# the endpoint - using get_dependency-KC.py for improved entity matching
 @app.get("/get_dependency")
 def get_dependency_route():
-#   did = request.args.get("did", "56e646580a50f305280bbafc")
-#   wid = request.args.get("wid", "5a99299fc7972f9cefe014a6")
-#   eid = request.args.get("eid", "482f1ae4627799170e6a9a4e")
-#   sketches = request.args.getlist("sketch") or [
-#     "Drivebase Top",
-#     "Drivebase Side",
-#     "Reef",
-#     "Substation",
-#     "Arm",
-#     "Hopper",
-#     "Frame Side",
-#     "Claw Sketch",
-#     "Front Home Coral",
-#     "Coral Grabber",
-#     "Chain Plan",
-#     "Tube Sketch",
-#   ]
-  # if we want to use the simpler model
-#   did = request.args.get("did", "85b058cdb321e64ab5d1f364")
-#   wid = request.args.get("wid", "a54015e3085683ae412da7b1")
-#   eid = request.args.get("eid", "78ac040ab4d3dfed2febd8a3")
-#   sketches = request.args.getlist("sketch") or ["Master Sketch"]
-
-
-#   entities_geo, entities_dep, doc_info, mate_connectors = compute_dependency(did, wid, eid, sketches)
-#   return jsonify([entities_geo, entities_dep, doc_info, mate_connectors])
-    entities_geo, entities_dep, doc_info,  mate_connectors= get_dependency(
+    # Import from get_dependency-KC.py which has the improved _match_entity_by_prefix logic
+    from importlib.machinery import SourceFileLoader
+    kc_module = SourceFileLoader("get_dependency_kc", "get_dependency-KC.py").load_module()
+    
+    entities_geo, entities_dep, doc_info, mate_connectors = kc_module.get_dependency(
         '56e646580a50f305280bbafc', '5a99299fc7972f9cefe014a6', '482f1ae4627799170e6a9a4e', 
-        ['Drivebase Top', 'Drivebase Side', 'Reef', 'Substation', 'Arm', 'Hopper', 'Frame Side', 'Claw Sketch', 'Front Home Coral', 'Coral Grabber', 'Chain Plan', 'Tube Sketch']
+        ['Drivebase Top', 'Drivebase Side', 'Substation', 'Arm', 'Hopper', 'Frame Side', 'Claw Sketch', 'Front Home Coral', 'Coral Grabber', 'Chain Plan', 'Tube Sketch']
     )
     results = [entities_geo, entities_dep, doc_info, mate_connectors]
-    json.dump(results, open('test_output_robot.json', 'w'))
+    json.dump(results, open('test_output_robot.json', 'w'), indent=2)
     return jsonify(results)
 
 
 
 if __name__ == "__main__":
-  app.run(host="0.0.0.0", port=5000, debug=True)
+  app.run(host="0.0.0.0", port=5001, debug=True)

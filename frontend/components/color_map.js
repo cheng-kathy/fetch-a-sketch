@@ -5,14 +5,12 @@ const toCssRGB = (r, g, b) => `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.ro
 
 
 
-// legend gradient
+// OrRd gradient (orange → red, no yellow)
 const TURBO_STOPS = [
-  { t: 0.00, c: [ 30,   0,  70] },  // deeper purple
-  { t: 0.20, c: [ 20, 110, 200] },  // brighter blue
-  { t: 0.40, c: [  0, 190, 140] },  // strong teal/green
-  { t: 0.60, c: [190, 210,  40] },  // vivid yellow-green
-  { t: 0.80, c: [255, 160,  10] },  // punchy orange
-  { t: 1.00, c: [235,   0,   0] },  // saturated red
+  { t: 0.00, c: [254, 217, 166] },  // light peach/orange
+  { t: 0.33, c: [254, 145,  65] },  // orange (between previous and current)
+  { t: 0.66, c: [233,  33,  34] },  // red (between previous and current)
+  { t: 1.00, c: [164,  15,  49] },  // dark red (between previous and current)
 ];
 
 export function turboGradient(t) {

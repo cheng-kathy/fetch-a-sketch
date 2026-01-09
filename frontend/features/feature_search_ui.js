@@ -120,9 +120,78 @@ export function createFeatureSearchBox({
   let currentDocItem = null;
   let currentElemItem = null;
   let pinnedFeature = null; // { did, eid, fid, name }
+  
+  // Track hovered items for cascading highlight
+  let hoveredDocItem = null;
+  let hoveredElemItem = null;
+  let hoveredFeatItem = null;
 
   function highlightItem(div, isActive) {
     div.style.background = isActive ? 'rgba(0,0,0,0.06)' : 'transparent';
+  }
+
+  // Hide the dropdown panel
+  function hideDropdown() {
+    panel.style.display = 'none';
+    noResult.style.display = 'none';
+    clearColumns();
+  }
+
+  // Check if a name is a master sketch (should be hidden from results)
+  function isMasterSketch(name) {
+    if (!name) return false;
+    const lower = name.toLowerCase();
+    return lower.includes('master sketch') || lower === 'master sketch';
+  }
+
+  // Show all documents without filtering (used when clicking on empty search)
+  function showAllDocs() {
+    const allDocs = new Map();
+    for (const [did, doc] of Object.entries(doc_info || {})) {
+      const docName = doc.name || did;
+      
+      // Skip documents named "Master Sketch"
+      if (isMasterSketch(docName)) continue;
+      
+      const elements = doc.elements || {};
+      const filteredElements = new Map();
+      
+      for (const [eid, el] of Object.entries(elements)) {
+        const elName = el.name || eid;
+        
+        // Skip elements named "Master Sketch"
+        if (isMasterSketch(elName)) continue;
+        
+        const feats = el.features || {};
+        // Filter out master sketch features
+        const allFeatures = Object.entries(feats)
+          .filter(([fid, feat]) => !isMasterSketch(feat.name || fid))
+          .map(([fid, feat]) => ({
+            fid,
+            name: feat.name || fid,
+            featureType: feat.featureType || '',
+          }));
+        
+        filteredElements.set(eid, {
+          did, wid: doc.wid, eid,
+          name: elName,
+          features: allFeatures,
+        });
+      }
+      
+      // Only add document if it has elements after filtering
+      if (filteredElements.size > 0) {
+        allDocs.set(did, {
+          did, wid: doc.wid, name: docName,
+          elements: filteredElements,
+        });
+      }
+    }
+    
+    panel.style.display = 'block';
+    noResult.style.display = 'none';
+    clearColumns();
+    renderDocs(allDocs);
   }
 
   function renderFeatures(elEntry) {
@@ -155,9 +224,25 @@ export function createFeatureSearchBox({
 
       btn.addEventListener('mouseenter', () => {
         btn.style.background = 'rgba(0,0,0,0.08)';
+        hoveredFeatItem = btn;
+        // Keep parent element and document highlighted
+        if (currentElemItem) currentElemItem.style.background = 'rgba(0,0,0,0.06)';
+        if (currentDocItem) currentDocItem.style.background = 'rgba(0,0,0,0.06)';
       });
       btn.addEventListener('mouseleave', () => {
         btn.style.background = 'transparent';
+        hoveredFeatItem = null;
+        // Restore parent highlights if still hovered
+        if (currentElemItem && currentElemItem === hoveredElemItem) {
+          currentElemItem.style.background = 'rgba(0,0,0,0.08)';
+        } else if (currentElemItem) {
+          currentElemItem.style.background = 'rgba(0,0,0,0.06)';
+        }
+        if (currentDocItem && currentDocItem === hoveredDocItem) {
+          currentDocItem.style.background = 'rgba(0,0,0,0.08)';
+        } else if (currentDocItem) {
+          currentDocItem.style.background = 'rgba(0,0,0,0.06)';
+        }
       });
 
       btn.addEventListener('click', () => {
@@ -194,17 +279,32 @@ export function createFeatureSearchBox({
         <div>${elEntry.name}</div>
       `;
 
-      item.addEventListener('mouseenter', () => { item.style.background = 'rgba(0,0,0,0.08)'; });
-      item.addEventListener('mouseleave', () => { item.style.background = 'transparent'; });
-
-      // hover , show features
+      // hover , show features and highlight
       item.addEventListener('mouseenter', () => {
         if (currentElemItem && currentElemItem !== item) {
-          highlightItem(currentElemItem, false);
+          currentElemItem.style.background = 'transparent';
         }
         currentElemItem = item;
-        highlightItem(item, true);
+        item.style.background = 'rgba(0,0,0,0.08)';
+        hoveredElemItem = item;
+        // Keep parent document highlighted
+        if (currentDocItem) currentDocItem.style.background = 'rgba(0,0,0,0.06)';
+        // Clear feature highlight when moving to element
+        if (hoveredFeatItem) {
+          hoveredFeatItem.style.background = 'transparent';
+          hoveredFeatItem = null;
+        }
         renderFeatures(elEntry);
+      });
+      item.addEventListener('mouseleave', () => { 
+        item.style.background = 'transparent';
+        hoveredElemItem = null;
+        // Restore parent document highlight if still hovered
+        if (currentDocItem && currentDocItem === hoveredDocItem) {
+          currentDocItem.style.background = 'rgba(0,0,0,0.08)';
+        } else if (currentDocItem) {
+          currentDocItem.style.background = 'rgba(0,0,0,0.06)';
+        }
       });
 
       // click element :highlight all entities under that element
@@ -240,17 +340,28 @@ export function createFeatureSearchBox({
         <div>${docEntry.name}</div>
       `;
 
-      item.addEventListener('mouseenter', () => { item.style.background = 'rgba(0,0,0,0.08)'; });
-      item.addEventListener('mouseleave', () => { item.style.background = 'transparent'; });
-
-      // hover : populate elements
+      // hover : populate elements and highlight
       item.addEventListener('mouseenter', () => {
         if (currentDocItem && currentDocItem !== item) {
-          highlightItem(currentDocItem, false);
+          currentDocItem.style.background = 'transparent';
         }
         currentDocItem = item;
-        highlightItem(item, true);
+        item.style.background = 'rgba(0,0,0,0.08)';
+        hoveredDocItem = item;
+        // Clear child highlights when moving to document
+        if (hoveredElemItem) {
+          hoveredElemItem.style.background = 'transparent';
+          hoveredElemItem = null;
+        }
+        if (hoveredFeatItem) {
+          hoveredFeatItem.style.background = 'transparent';
+          hoveredFeatItem = null;
+        }
         renderElements(docEntry);
+      });
+      item.addEventListener('mouseleave', () => { 
+        item.style.background = 'transparent';
+        hoveredDocItem = null;
       });
 
       // click document : highlight all entities in all its elements
@@ -334,9 +445,7 @@ export function createFeatureSearchBox({
     }
 
     if (!q) {
-      panel.style.display = 'none';
-      noResult.style.display = 'none';
-      onHighlightEntities?.(null);
+      showAllDocs();
       return;
     }
 
@@ -345,6 +454,10 @@ export function createFeatureSearchBox({
 
     for (const [did, doc] of Object.entries(doc_info || {})) {
       const docName = doc.name || did;
+      
+      // Skip documents named "Master Sketch"
+      if (isMasterSketch(docName)) continue;
+      
       const docMatches = matches(docName, q) || matches(did, q);
 
       const filteredElements = new Map();
@@ -352,6 +465,10 @@ export function createFeatureSearchBox({
       const elements = doc.elements || {};
       for (const [eid, el] of Object.entries(elements)) {
         const elName = el.name || eid;
+        
+        // Skip elements named "Master Sketch"
+        if (isMasterSketch(elName)) continue;
+        
         const elemMatches = matches(elName, q) || matches(eid, q);
 
         const feats = el.features || {};
@@ -364,16 +481,19 @@ export function createFeatureSearchBox({
           if (docMatches || elemMatches || featMatches) {
             // if doc or element matched, keep all features
             if (docMatches || elemMatches) {
-              // push all features and break
+              // push all features (except master sketches) and break
               for (const [fid2, feat2] of Object.entries(feats)) {
-                keptFeatures.push({
-                  fid: fid2,
-                  name: feat2.name || fid2,
-                  featureType: feat2.featureType || '',
-                });
+                const featName2 = feat2.name || fid2;
+                if (!isMasterSketch(featName2)) {
+                  keptFeatures.push({
+                    fid: fid2,
+                    name: featName2,
+                    featureType: feat2.featureType || '',
+                  });
+                }
               }
               break;
-            } else if (featMatches) {
+            } else if (featMatches && !isMasterSketch(featName)) {
               keptFeatures.push({
                 fid,
                 name: featName,
@@ -424,8 +544,24 @@ export function createFeatureSearchBox({
     if (e.key === 'Enter') runSearch();
   });
 
+  // Show dropdown with all documents when clicking on the search input
+  input.addEventListener('focus', () => {
+    if (!input.value.trim()) {
+      showAllDocs();
+    }
+  });
+
+  // Hide dropdown when clicking outside the search box
+  function handleClickOutside(e) {
+    if (!wrap.contains(e.target)) {
+      hideDropdown();
+    }
+  }
+  document.addEventListener('click', handleClickOutside);
+
   return {
     dispose() {
+      document.removeEventListener('click', handleClickOutside);
       wrap.remove();
     },
     flashNotFound() {
