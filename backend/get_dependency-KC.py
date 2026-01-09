@@ -4,6 +4,7 @@ import zlib
 import warnings
 import requests 
 from typing import Dict, List, Tuple, Any
+from pathlib import Path
 
 import re
 import math
@@ -462,8 +463,9 @@ if __name__ == "__main__":
     # Folder ID: 514f41dd2f31f68c801bfeaa
     entities_geo, entities_dep, doc_info, mate_connectors = get_dependency(
         '56e646580a50f305280bbafc', '5a99299fc7972f9cefe014a6', '482f1ae4627799170e6a9a4e', 
-        ['Drivebase Top', 'Drivebase Side', 'Reef', 'Substation', 'Arm', 'Hopper', 'Frame Side', 'Claw Sketch', 'Front Home Coral', 'Coral Grabber', 'Chain Plan', 'Tube Sketch']
+        ['Drivebase Top', 'Drivebase Side', 'Substation', 'Arm', 'Hopper', 'Frame Side', 'Claw Sketch', 'Front Home Coral', 'Coral Grabber', 'Chain Plan', 'Tube Sketch']
     )
     results = [entities_geo, entities_dep, doc_info, mate_connectors]
-    json.dump(results, open('test_output_robot.json', 'w'), indent=2)
+    output_path = Path(__file__).parent / 'test_output_robot.json'
+    json.dump(results, open(output_path, 'w'), indent=2)
 
