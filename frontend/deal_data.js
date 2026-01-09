@@ -1,5 +1,5 @@
 import { callPython } from './get_data.js';
-import fallbackData from '../backend/test_output_robot.json';
+import fallbackData from '../backend/test_output_robot_bigger.json';
 
 // Toggle backend vs local JSON. 
 // True for reading from json, false for callin pythong API
