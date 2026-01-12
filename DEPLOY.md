@@ -73,3 +73,4 @@ After deployment, you can:
 - **Assets not loading**: Ensure paths in your code are relative (not absolute)
 - **API errors**: This is expected - the app will use the fallback JSON data
 
+
